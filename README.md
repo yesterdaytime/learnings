@@ -7,5 +7,5 @@ Folder
     leetcode: do some leetcode exam
     front: front knowledge
     sort: sort in python and ts
-
+    linux: shell and some linux command
 
