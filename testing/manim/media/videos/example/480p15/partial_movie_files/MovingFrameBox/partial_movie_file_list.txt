@@ -1,6 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/Users/mingpeiw/Desktop/project/leetcode/testing/manim/media/videos/example/480p15/partial_movie_files/MovingFrameBox/4266129954_3053108954_223132457.mp4'
-file 'file:/Users/mingpeiw/Desktop/project/leetcode/testing/manim/media/videos/example/480p15/partial_movie_files/MovingFrameBox/1442284246_3613292726_3990872246.mp4'
-file 'file:/Users/mingpeiw/Desktop/project/leetcode/testing/manim/media/videos/example/480p15/partial_movie_files/MovingFrameBox/1442284246_329969645_1873860077.mp4'
-file 'file:/Users/mingpeiw/Desktop/project/leetcode/testing/manim/media/videos/example/480p15/partial_movie_files/MovingFrameBox/1442284246_3848949371_405830569.mp4'
-file 'file:/Users/mingpeiw/Desktop/project/leetcode/testing/manim/media/videos/example/480p15/partial_movie_files/MovingFrameBox/1442284246_329969645_882684518.mp4'

@@ -1,3 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/Users/mingpeiw/Desktop/project/leetcode/testing/manim/media/videos/example/480p15/partial_movie_files/SineCurveUnitCircle/4266129954_919956321_1158367347.mp4'
-file 'file:/Users/mingpeiw/Desktop/project/leetcode/testing/manim/media/videos/example/480p15/partial_movie_files/SineCurveUnitCircle/1442284246_329969645_393794649.mp4'
