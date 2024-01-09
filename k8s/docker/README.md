@@ -61,3 +61,37 @@ Dockerfile every command is one layout, if see the same layout in the other imag
     CMD       # some start command
 
     EXPOSE    # expose the port that which user can visit from the outside. 
+
+# Docker service
+This command want to do some thing like k8s, you can use this command config the docker service, it support the replicas(like 5), it will create 1 image and 5 containers.
+
+If you want to run this command, you must confirm you are use docker swarm generate the node, run `docker swarm init`, it will tell you how to join the computer to the swarm. If you forget the token, you can run this command see the full command: `docker swarm join-token worker`
+
+Of course, you can close the swarm model: `docker swarm leave`, before you leave, you can find the managers in the `docker info`, after you leave, you can't find it.
+
+You can remove it use `docker service rm`
+
+
+# Docker compose
+
+docker compose在本地run docker，默认是在build中指定自己本地的Dockerfile, 也可以用hub上的docker image。docker compose可以批量启动不同的docker, 对多个service，是比较有效的搭建本地环境的方法。没有重试机制，稳定性不能保证，只能用于本地测试，如果是线上项目，建议还是k8s。
+
+    1. Create compose.yaml and give the ports mapping
+            browser visit port:docker expose port
+    2. run docker compose up
+    3. visit the link and check if it fine.
+
+Commands
+    
+    默认运行的file是当前路径下的compose.yaml，如果没有且没有指定 -f, 会报错
+
+    docker compose run 
+        根据 compose.yaml 运行里面所有的配置好的docker, 加上对应的service 和service 属性，可以get到所有的对应的参数， example: docker compose run web env, 看  web service 下的environment.
+    
+    docker compose stop
+        根据 compose.yaml 停掉里面所有的配置好的docker
+    
+    docker compose ls
+        list所有的compose project
+    
+

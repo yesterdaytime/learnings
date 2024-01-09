@@ -1,0 +1,65 @@
+# docker compose: create a image in local and run it. 
+# you can find the image and container in local
+# If you config some ports, you can visit it in local.
+
+# image: is the name of image in art lib
+# build: is the Dockerfile path in you local
+services:
+  frontend:
+    image: example/frontend
+    build: ./webapp
+
+  backend: 
+    image: example/database
+    build: 
+      context: ./dir
+      dockerfile: ../backend.Dockerfile
+
+  testing:
+    image: example/testing
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM baseimage
+        RUN some command
+
+---
+# Add some configs
+services:
+  redis:
+    image: redis:latest
+    configs:
+      - my_config
+      - my_other_config
+configs:
+  my_config:
+    file: ./my_config.txt
+  my_other_config:
+    external: true
+
+---
+# extends another service
+services:
+  base:
+    image: busybox
+    user: root
+  common:
+    image: busybox
+    extends:
+      service: base
+  cli:
+    extends:
+      service: common
+  
+---
+# depend on 
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+  db:
+    image: postgres

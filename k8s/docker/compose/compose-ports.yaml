@@ -1,0 +1,8 @@
+# This is only testing the ports, we don't need create a new Dockerfile and directory
+services:
+  frontend:
+    image: nginx
+    ports:
+      - 8000:80
+    environment:
+      FLASK_DEBUG: "true"
