@@ -112,35 +112,3 @@
             }
         }
 </details>
-
-# K8s Rule
-
-<details>
-    <summary> Basic Rule </summary>
-    
-    apiVersion: v1
-    kind: type 
-    metadata:
-        name: uniq_name
-        namespace: default
-    spec:
-        ...
-</details>
-
-<details>
-    <summary>Deployment</summary>
-
-    
-</details>
-
-<details>
-    <summary></summary>
-</details>
-
-<details>
-    <summary></summary>
-</details>
-
-<details>
-    <summary></summary>
-</details>

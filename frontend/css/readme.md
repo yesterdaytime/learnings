@@ -15,4 +15,4 @@
 | .A + .B  |   A \e B   | A is brother of B and B after A, can't have other els between a and B  |  
 | .A ~ .B  |   A \e C \e B \e B  | A is brother of B and B after A, can have other els between A and B    | 
 | [A='value']   |  el A='value'  | A attribute is value | 
-| [A='']
+| [A='']  | 

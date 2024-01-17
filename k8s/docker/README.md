@@ -13,6 +13,13 @@ Docker desktop need pay some money, so we can use the [colima](https://github.co
 7. colima status 
 8. colima stop (if you are done using docker) 
 
+Errors: 
+    failed to download "...ubuntu-23.10-minimal-cloudimg-arm64.qcow2": Get "...": dial tcp 20.205.243.166:443: i/o timeout
+        kill sshd process and restart the colima
+    
+    Waiting for the essential requirement 1 of 5: ssh
+        colima start --arch x86_64
+
 ### Other install
 
 1. please check the github repo of the [colima](https://github.com/abiosoft/colima)
