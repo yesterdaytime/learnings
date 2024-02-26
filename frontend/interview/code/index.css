@@ -1,0 +1,89 @@
+html {
+  font-size: 48px;
+}
+
+body .red {
+  color: red;
+}
+body .green {
+  color: green;
+}
+body .blue {
+  color: blue;
+}
+body .bg-red {
+  background-color: red;
+}
+body .bg-green {
+  background-color: green;
+}
+body .bg-blue {
+  background-color: blue;
+}
+body #priority .container {
+  color: yellow;
+}
+body #priority .container #child1 {
+  color: blue;
+}
+body #priority .container #child2 {
+  color: red;
+}
+body #priority .container .child {
+  color: green;
+}
+body #px-rem #px-example {
+  font-size: 24px;
+}
+body #px-rem #rem-example {
+  font-size: 1rem;
+}
+body #ly-center {
+  display: flex;
+  margin: 10px;
+  flex-wrap: wrap;
+}
+body #ly-center .father {
+  border: 1px solid black;
+  width: 600px;
+  height: 600px;
+}
+body #ly-center .father .child {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+body #ly-center .position-margin {
+  position: relative;
+}
+body #ly-center .position-margin .child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+body #ly-center .position-transform {
+  position: relative;
+}
+body #ly-center .position-transform .child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+body #ly-center .flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body #ly-center .grid-center {
+  display: grid;
+  grid: repat(3, 1fr)/repeat(3, 1fr);
+}
+body #ly-center .grid-center .child {
+  grid-area: 2/3/2/3;
+}
+
+/*# sourceMappingURL=index.css.map */
