@@ -1,0 +1,45 @@
+before_script:
+    - echo "Before script section"
+
+after_script:
+    - echo "After script section"
+
+cache:
+    key: node_modules
+    paths:
+        - ./node_modules
+
+stages:
+    - build
+    - test
+    - deploy
+
+build1:
+    stage: build
+    script:
+        - echo "Do your build here"
+        - ping -c 3 127.0.0.1
+
+    cache:
+        key: node_modules
+        paths:
+            - ./node_module
+        policy: pull
+
+#  when: manual
+
+test:
+    stage: test
+    script:
+        - echo "Do a test here"
+        - echo "For example run a test suite"
+        - ping -c 1 10.5.6.7
+    #when: manual
+    allow_failure: true
+
+deploy:
+    stage: deploy
+    script:
+        - echo "Do your deploy here"
+        - ping -c 3 127.0.0.1
+    #when: manual

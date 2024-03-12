@@ -21,7 +21,7 @@
 
     重排：布局引擎会根据 css 计算出元素在页面中的位置和大小
     重绘：浏览器根据 css 样式的变化，对元素的样式进行重新绘制
-    ![浏览器渲染机制](../image/browser%20load.png)
+    ![浏览器渲染机制](./image/browser%20load.png)
 
 -   水平垂直居中
 
@@ -555,6 +555,14 @@
     2. 定时器重新刷新 token
     3. api 返回 401，刷新 token
 
+-   降低页面加载时间的方法
+
+    1. 减少图片大小，按需引入
+    2. 懒加载
+    3. keep-alive
+    4. 减少接口请求次数
+    5. gzip 打包
+
 -   大文件上传
 
     主要有分块上传 和 断点续传
@@ -667,3 +675,253 @@
 -   git 操作
 
     ![git 网图](./image/git.svg)
+
+-   shell
+
+    1.  变量
+
+        name="Test"
+
+        local name1="test"
+
+            local在函数中时，在函数外部无法访问
+
+        name2=`${name}`
+
+    2.  字符操作
+
+        1. 合并
+
+            name4=${name}${name1} => name4=Testtest
+
+        2. 获取长度
+
+            echo 'abc' | wc -L
+
+            echo 'abc' | awk '{print length($0)}'
+
+        3. 截取
+
+            test='abc'
+
+            echo ${test:0:2}
+
+    3.  数组
+
+        1. 数组
+
+            test=(1 2 3)
+
+            test[0] => 1
+
+        2. 遍历数组
+
+            echo ${test[*]} => 1 2 3
+
+            echo ${test[@]} => 1 2 3
+
+        3. length
+
+            echo ${#test[*]}
+
+        4. 合并
+
+            test=(1 2 3)
+
+            test1=(4 5 6)
+
+            echo (${test[*]} ${test1[*]})
+
+        5. 删除
+
+            test=(1 2 3)
+
+            unset test[1] => 删除 2
+
+    4.  loop
+
+    ```
+        for((i=0;i<10;i++))
+        do
+            echo 'loop'
+        done
+
+        while [condition]
+        do
+
+        done
+    ```
+
+    5.  if
+
+        ```
+            num=15
+
+            if [ $num -lt 10 ]
+            then
+                echo "Number is less than 10."
+            elif [ $num -eq 10 ]
+            then
+                echo "Number is equal to 10."
+            else
+                echo "Number is greater than 10."
+            fi
+        ```
+
+    6.  参数
+
+        1. 按顺序取参数， 参数不带 - --之类的
+
+            $0-$9: 是执行的 shell 脚本或命令的参数，对应从第 1 个开始的参数值， 0 是文件名或者函数名，1-9 是参数值
+
+            $@ 参数部分组成的列表，可以遍历
+            $\* 参数部分组成的列表字符串
+            $# 参数长度
+
+        2. 按名称取参数, 短的用 getopts,长的需要安装 getopt 库来实现， 通过 getopt_long 操作
+
+            \? 未知的
+            : 前面都不满足的情况
+
+            ```
+            while getopts ":a:b:c:" opt; do
+                case $opt in
+                    a)
+                        a="$OPTARG"
+                        ;;
+                    b)
+                        b="$OPTARG"
+                        ;;
+                    c)
+                        c="$OPTARG"
+                        ;;
+                    \?)
+                        echo "无效的选项: -$OPTARG" >&2
+                        exit 1
+                        ;;
+                    :)
+                        echo "选项 -$OPTARG 需要一个参数" >&2
+                        exit 1
+                        ;;
+                esac
+            done
+            ```
+
+    7.  case-in-esac
+
+    8.  select in
+
+        这个语法是交互用的，基本上根据用户操作，做出相应的动作，只执行一次
+
+        可以通过 read 来确定键盘输入：
+
+            read -p "input your password:" -s pwd
+
+            echo ${pwd}
+
+            read 参数
+
+                -s	隐藏用户键入的值
+                -p	打印提示信息来提示用户输入正确的内容
+                -t	设置用户输入的时间限制；超时则退出程序
+                -n	限制用户输入内容的长度(单位是字符位)
+                -r	允许用户输入特殊字符，如 空格、/、\、？等
+                -a	赋值数组
+                -u	从给定文件描述符(fd=N)中读取数据
+                -d	表示delimiter，即定界符
+                -e	只用于互相交互的脚本，它将readline用于收集输入行
+
+    9.  文件操作
+
+        将加过输入到文件中
+
+        ```
+            > 覆盖操作
+            >> 追加到文件末尾
+
+        ```
+
+        读取文件内容
+
+        cat | less | header -n | more | tail -n
+
+        header 和 tail 相反
+
+-   文件权限
+
+    文件系统有三组权限， 分别为 用户权限 组权限 其他用户权限
+    同时计算规则为三位二进制数： 第一位为 read, 第二位为 write, 第三位为 operate
+    755 为 111 101 101
+
+-   angular hook
+
+    1.  ngOnChanges When an input or output binding value changes.
+    2.  ngOnInit After the first ngOnChanges.
+    3.  ngDoCheck Developer's custom change detection.
+    4.  ngAfterContentInit After component content initialized.
+    5.  ngAfterContentChecked After every check of component content.
+    6.  ngAfterViewInit After the views of a component are initialized.
+    7.  ngAfterViewChecked After every check of the views of a component.
+    8.  ngOnDestroy Just before the directive is destroyed.
+
+-   angular 优势
+
+    支持双向数据绑定
+    它遵循 MVC 模式架构
+    它支持静态模板和 Angular 模板
+    您可以添加自定义指令
+    支持验证
+    客户端和服务器之间的通讯便利
+    支持依赖注入
+
+-   ts genericity
+
+    ```
+        export type GenericityTest<T> = {
+            [K in keyof T]: T[K] extends String
+                ? T[keyof T]
+                : {
+                    [L in keyof T[K]]: T[K][L];
+                };
+        };
+
+    ```
+
+-   RegExp
+
+    1. \S: 除换行符，空格外，所有的字符
+    2. \s： 换行符 空格
+    3. \w: 字符下划线
+    4. \W: 特殊字符
+
+    标志位：
+
+    1. g: 全局匹配
+    2. i: 忽略大小写
+    3. m: 换行匹配
+
+-   react 如何根据不同的权限访问不同的页面
+
+    1. 在页面根据不同的权限隐藏相应的菜单
+    2. 在 middleware 中验证 link 是否有权限 open
+
+-   nextjs router 规则
+
+    1. 以文件嵌套为路径
+    2. 带[]的文件，[] 内是 link 中的值，可以为任意你需要传进组件的值，用 \[slug\] 为例, 取值如下：
+
+        ```
+        export default function Page({ params }: { params: { slug: string } }) {
+            return <h1>My Page</h1>
+        }
+        ```
+
+    3. @开头的文件不显示在 link 中
+
+-   useState 过程
+
+    当调用 setState 时， React 做的第一件事是将传递给 setState 的对象合并到组件的当前状态，这将启动一个称为和解（ reconciliation）的过程。
+    和解的最终目标是，根据这个新的状态以最有效的方式更新 DOM。
+    为此， React 将构建一个新的 React 虚拟 DOM 树（可以将其视为页面 DOM 元素的对象表示方式）。
+    一旦有了这个 DOM 树，为了弄清 DOM 是如何响应新的状态而改变的， React 会将这个新树与上一个虚拟 DOM 树比较。
+    这样做， React 会知道发生的确切变化，并且通过了解发生的变化后，在绝对必要的情况下进行更新 DOM，即可将因操作 DOM 而占用的空间最小化。
