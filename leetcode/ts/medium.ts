@@ -1,4 +1,38 @@
+/**
+ Definition for singly-linked list.
+ */
+export class ListNode {
+    val: number;
+    next: ListNode | null;
+    constructor(val?: number, next?: ListNode | null) {
+        this.val = val === undefined ? 0 : val;
+        this.next = next === undefined ? null : next;
+    }
+}
 class MediumLeetCode {
+    addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
+        let val = 0,
+            carry = 0,
+            result: ListNode | null = new ListNode(0);
+        while (l1 || l2 || carry) {
+            let total = (l1?.val || 0) + (l2?.val || 0) + carry;
+            val = total % 10;
+            carry = total > 9 ? 1 : 0;
+            result.val = val;
+
+            console.log(carry, total);
+
+            let temp = result;
+            result = new ListNode(0);
+            result.next = temp;
+
+            l1 = l1?.next || null;
+            l2 = l2?.next || null;
+        }
+
+        return result.next;
+    }
+    //#region
     splitNum(num: number): number {
         let sortedStr = String(num)
             .split('')
@@ -247,6 +281,168 @@ class MediumLeetCode {
 
         return sum;
     }
+
+    /**
+     * 
+     * @param plants 
+     * @param capacity 
+     * @returns 
+     * 
+     * 你打算用一个水罐给花园里的 n 株植物浇水。植物排成一行，从左到右进行标记，编号从 0 到 n - 1 。其中，第 i 株植物的位置是 x = i 。x = -1 处有一条河，你可以在那里重新灌满你的水罐。
+
+        每一株植物都需要浇特定量的水。你将会按下面描述的方式完成浇水：
+
+        按从左到右的顺序给植物浇水。
+        在给当前植物浇完水之后，如果你没有足够的水 完全 浇灌下一株植物，那么你就需要返回河边重新装满水罐。
+        你 不能 提前重新灌满水罐。
+        最初，你在河边（也就是，x = -1），在 x 轴上每移动 一个单位 都需要 一步 。
+
+        给你一个下标从 0 开始的整数数组 plants ，数组由 n 个整数组成。其中，plants[i] 为第 i 株植物需要的水量。另有一个整数 capacity 表示水罐的容量，返回浇灌所有植物需要的 步数 。
+
+        
+
+        示例 1：
+
+        输入：plants = [2,2,3,3], capacity = 5
+        输出：14
+        解释：从河边开始，此时水罐是装满的：
+        - 走到植物 0 (1 步) ，浇水。水罐中还有 3 单位的水。
+        - 走到植物 1 (1 步) ，浇水。水罐中还有 1 单位的水。
+        - 由于不能完全浇灌植物 2 ，回到河边取水 (2 步)。
+        - 走到植物 2 (3 步) ，浇水。水罐中还有 2 单位的水。
+        - 由于不能完全浇灌植物 3 ，回到河边取水 (3 步)。
+        - 走到植物 3 (4 步) ，浇水。
+        需要的步数是 = 1 + 1 + 2 + 3 + 3 + 4 = 14 。
+        示例 2：
+
+        输入：plants = [1,1,1,4,2,3], capacity = 4
+        输出：30
+        解释：从河边开始，此时水罐是装满的：
+        - 走到植物 0，1，2 (3 步) ，浇水。回到河边取水 (3 步)。
+        - 走到植物 3 (4 步) ，浇水。回到河边取水 (4 步)。
+        - 走到植物 4 (5 步) ，浇水。回到河边取水 (5 步)。
+        - 走到植物 5 (6 步) ，浇水。
+        需要的步数是 = 3 + 3 + 4 + 4 + 5 + 5 + 6 = 30 。
+        示例 3：
+
+        输入：plants = [7,7,7,7,7,7,7], capacity = 8
+        输出：49
+        解释：每次浇水都需要重新灌满水罐。
+        需要的步数是 = 1 + 1 + 2 + 2 + 3 + 3 + 4 + 4 + 5 + 5 + 6 + 6 + 7 = 49 。
+
+     */
+    wateringPlants(plants: number[], capacity: number): number {
+        let surplus = capacity;
+        let steps = 0;
+
+        for (let i = 0; i < plants.length; i++) {
+            if (plants[i] > capacity) {
+                continue;
+            }
+            if (surplus >= plants[i]) {
+                steps += 1;
+            } else {
+                surplus = capacity;
+                steps = 2 * i + 1 + steps;
+            }
+
+            surplus = surplus - plants[i];
+
+            console.log(steps);
+        }
+
+        return steps;
+    }
+
+    // TODO I can't solve this problem
+    minimumEffortPath(heights: number[][]): number {
+        let dp: number[][] = [],
+            abs: number[][] = [];
+
+        if (!heights[0]) {
+            return 0;
+        }
+
+        let minAbs = (i: number, j: number) => {
+            const left = i > 0 ? heights[i - 1][j] : Number.MAX_SAFE_INTEGER;
+            const up = j > 0 ? heights[i][j - 1] : Number.MAX_SAFE_INTEGER;
+            const right =
+                i < heights.length - 1
+                    ? heights[i + 1][j]
+                    : Number.MAX_SAFE_INTEGER;
+            const down =
+                j < (heights[0].length || 0)
+                    ? heights[i][j + 1]
+                    : Number.MAX_SAFE_INTEGER;
+            return Math.min(
+                Math.abs(heights[i][j] - left),
+                Math.abs(heights[i][j] - right),
+                Math.abs(heights[i][j] - up),
+                Math.abs(heights[i][j] - down)
+            );
+        };
+
+        for (let i = 0; i < heights.length; i++) {
+            abs[i] = [];
+            for (let j = 0; j < heights[0].length; j++) {
+                abs[i][j] = minAbs(i, j);
+            }
+        }
+
+        for (let k = 0; k < abs.length; k++) {
+            dp[k] = [];
+            for (let l = 0; l < abs[0].length; l++) {}
+        }
+
+        return dp[heights.length - 1][heights[0].length - 1];
+    }
+
+    wordPuzzle(grid: string[][], target: string): boolean {
+        let book: boolean[][] = [];
+        let words: { [index in string]: number[][] } = {};
+        for (let i = 0; i < grid.length; i++) {
+            book[i] = [];
+            for (let j = 0; j < grid[i].length; j++) {
+                words[grid[i][j]] = (words[grid[i][j]] || []).concat([i, j]);
+                book[i][j] = false;
+            }
+        }
+
+        let dfs = (x: number, y: number) => {
+            book[x][y] = true;
+            dfs(x, y);
+            book[x][y] = false;
+        };
+
+        for (let j = 0; j < target.length; j++) {}
+
+        return false;
+    }
+
+    gNodeList(list: number[]): ListNode | null {
+        let result: ListNode | null = null,
+            temp: ListNode | null = null;
+        for (let item of list) {
+            if (temp) {
+                temp.next = new ListNode(item);
+                temp = temp.next;
+            } else {
+                result = temp = new ListNode(item);
+            }
+        }
+
+        return result;
+    }
+
+    dListNode(l: ListNode | null) {
+        let list = [];
+        while (l) {
+            list.push(l.val);
+            l = l.next;
+        }
+        return list;
+    }
+    //#endregion
 }
 
 const mleetCode = new MediumLeetCode();
@@ -276,6 +472,26 @@ const mleetCode = new MediumLeetCode();
     let nums1 = [1, 3],
         nums2 = [2, 4];
     console.log(mleetCode.findMedianSortedArrays(nums1, nums2));
+
+    console.log(mleetCode.longestPalindrome('aacabdkacaa'));
+
+    console.log(mleetCode.wateringPlants([3, 2, 4, 2, 1], 6));
+    console.log(
+        mleetCode.minimumEffortPath([
+            [1, 2, 1, 1, 1],
+            [1, 2, 1, 2, 1],
+            [1, 2, 1, 2, 1],
+            [1, 2, 1, 2, 1],
+            [1, 1, 1, 2, 1],
+        ])
+    );
 });
 
-console.log(mleetCode.longestPalindrome('aacabdkacaa'));
+console.log(
+    mleetCode.dListNode(
+        mleetCode.addTwoNumbers(
+            mleetCode.gNodeList([9, 9, 9, 9, 9, 9, 9]),
+            mleetCode.gNodeList([9, 9, 9, 9])
+        )
+    )
+);

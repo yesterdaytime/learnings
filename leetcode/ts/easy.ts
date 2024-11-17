@@ -1,4 +1,16 @@
 class LeetCode {
+    //#region
+    twoSum(nums: number[], target: number): number[] {
+        for (let i = 0; i < nums.length - 1; i++) {
+            for (let j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] === target) {
+                    return [i, j];
+                }
+                console.log([i, j]);
+            }
+        }
+        return [];
+    }
     splitNum(num: number): number {
         let sortedStr = String(num)
             .split('')
@@ -254,6 +266,37 @@ class LeetCode {
 
         return list.length * 8;
     }
+
+    islandPerimeter(grid: number[][]): number {
+        return 0;
+    }
+
+    discountPrices(sentence: string, discount: number): string {
+        let list = sentence.split(' ');
+
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].match(/^\d+$/)) {
+                list[i] = `$${(
+                    Number(list[i].substring(1)) *
+                    (1 - discount / 100)
+                ).toFixed(2)}`;
+            }
+        }
+        return list.join(' ');
+    }
+
+    detectCapitalUse(word: string): boolean {
+        let allUpper = word
+            .split('')
+            .map((s) => (s.toUpperCase() === s ? 1 : 0));
+
+        return (
+            allUpper.length === 0 ||
+            allUpper.length === 1 ||
+            allUpper.length === word.length
+        );
+    }
+    //#endregion
 }
 
 const leetCode = new LeetCode();
@@ -261,8 +304,12 @@ const leetCode = new LeetCode();
 (function () {
     console.log(leetCode.splitNum(4325));
     console.log(leetCode.splitNum(687));
-});
-let nums = [2, 3, 4, 6, 8, 12];
+    let nums = [2, 3, 4, 6, 8, 12];
 
-//
-console.log(leetCode.tupleSameProduct(nums));
+    //
+
+    let sentence = '1 2 $3 4 $5 $6 7 8$ $9 $10$',
+        discount = 100;
+    console.log(leetCode.discountPrices(sentence, discount));
+    console.log(leetCode.twoSum([3, 2, 4], 6));
+});

@@ -8,7 +8,7 @@
         },
  }
 */
-export default class {
+export default class TestDb {
     constructor() {
         this.db = null;
     }

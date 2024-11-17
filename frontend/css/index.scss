@@ -1,0 +1,386 @@
+:root {
+    color: #000;
+}
+
+input[name='dark'] {
+    color: firebrick;
+}
+
+body {
+    color: firebrick;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+main {
+    height: 100vh;
+    width: 100%;
+}
+
+/* All the elements styles */
+* {
+    height: auto;
+}
+
+div {
+    width: 100%;
+}
+
+/* A and B, id selector */
+#basic-selector,
+#basic-attr-selector,
+#other-selector,
+.container {
+    height: auto;
+}
+
+/* class selector */
+.d-a {
+    background-color: crimson;
+}
+
+.d-b {
+    height: 40px;
+}
+
+.d-s-a {
+    height: 30px;
+}
+
+.d-b,
+.d-d {
+    background-color: aqua;
+}
+
+/* a: parent, b: children */
+.d-b > .d-s-a {
+    background-color: brown;
+}
+
+/* a: parent or ancestor, b: children */
+.d-b .d-ss-a {
+    background-color: blue;
+    margin-bottom: 20px;
+}
+
+/* a before B, and doesn't have other elements */
+.d-d + .d-e {
+    background-color: black;
+}
+
+/* a before B, and maybe has other elements */
+.d-d ~ p {
+    background-color: blueviolet;
+}
+
+/* attribute selector */
+[data-id='a'] {
+    background-color: green;
+    font-size: small;
+}
+
+/* 
+    attribute include some value, this value is full string of the attribute 
+    Like [data-id~=a], this will select the <div data-id="a"></div> and <div data-id="b a c"></div>
+*/
+[data-id~='a'] {
+    color: red;
+}
+
+/* 
+    attribute start with some value or the attribute is the value.
+    Like [data-id|=a], this will select the <div data-id="a"></div> and <div data-id="a-c"></div> and <div data-id="a-c d"></div>
+    But can't match the <div data-id="a b"></div>
+*/
+[data-id|='b'] {
+    color: orange;
+    background-color: black;
+}
+
+/* 
+    attribute start with some value or the attribute is the value.
+    Like [data-id^=a], this will select the <div data-id="a"></div> and <div data-id="a-c"></div> and <div data-id="a b"></div>
+*/
+[data-id^='c'] {
+    color: blueviolet;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* 
+    attribute start with some value or the attribute is the value.
+    Like [data-id$=a], this will select the <div data-id="a"></div> and <div data-id="c-a"></div> and <div data-id="c a"></div>
+*/
+[data-id$='c'] {
+    font-size: large;
+    background-color: aqua;
+}
+
+/* 
+    attribute start with some value or the attribute is the value.
+    Like [data-id*=a], this will select the <div data-id="a"></div>, <div data-id="c-a"></div>, <div data-id="c-a-d"></div> and <div data-id="c a d"></div>
+*/
+[data-id*='d'] {
+    color: #cc0;
+    background-color: brown;
+}
+
+/* Worked to list-items, like li */
+::marker {
+    color: burlywood;
+}
+
+a:active {
+    color: chartreuse;
+}
+
+a:hover {
+    color: yellowgreen;
+}
+
+a:visited {
+    color: violet;
+}
+
+/* 
+    box-shadow: x, y blur radus color inset, ...
+ */
+.before-after {
+    background-color: cadetblue;
+    height: 50px;
+    font-size: large;
+    line-height: 36px;
+    border-radius: 3px;
+    box-shadow: 5px 5px 2px 5px #cc0, 10px 10px 2px 5px green;
+    width: 60%;
+    margin-bottom: 25px;
+}
+
+/* 
+    content can be any thing: image, special chart, unicode chart. 
+    In some UI libs, the checkbox and radio use the label before generate the checkbox color, after generate the selected style. 
+    Of course, some libs use div cover the checkbox color and svg generate the selected style.
+*/
+.before-after::before {
+    content: '\005E';
+    float: left;
+}
+
+.before-after::after {
+    content: '\0024';
+    float: right;
+}
+
+/* box-shadow around the elements in inside */
+.circle-shadow {
+    box-shadow: inset 0 0 20px 10px red,
+        inset 0px 0px 40px 10px green;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+/* box-shadow around the elements in outside */
+.div-shadow {
+    height: 50px;
+    width: 50%;
+    background-color: aqua;
+    box-shadow: 0 0 10px 10px gray;
+}
+
+/* 
+    flex testing 
+    aligin-items, aligin-content, justify-content, flex-direction and flex-wrap can change in chrome css, every styles have the example, you can try it. 
+    aligin-items: 作用与一条线上的元素，当元素高度不同时，可以看到效果。
+    aligin-content: 当有元素总高度小于container高度，可以看到效果
+    justify-content: 调整元素在水平方向的布局
+
+    flex, flex-grow, flex-shrink, flex-basis
+    flex: 后面三个的集合， 整数第一个代表flex-grow, 第二个代表flex-shrink, 百分比和加单位的数代表flex-basis, 可以有一个两个数，三个数， 想flex-shrink,必须先写flex-grow. 
+    flex-grow: 扩充比例，当children 宽度小于container 宽度起作用.
+    flex-shrink: 缩放比例， 当 children宽度大于container 宽度起作用
+    flex-basis: 设置box宽度, 在没有box-sizing的时候起作用
+
+    flex-basis 有几个关键字： min-content, max-content, fit-content, fill.
+    min-content: 按content中的内容的最大值来， 字符，找最长的单词，image和最大的image 宽度一致
+    max-content: 按content长度来，可以超出父容器
+    fit-content: 和 max-content 类似，但不可以超出父容器
+*/
+.flex-container {
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.flex-container > div {
+    height: 200px;
+    width: 200px;
+    background-color: chartreuse;
+    margin: 5px;
+    flex: auto;
+    /* =  flex: 1 1 auto */
+}
+
+.flex-container > div:nth-child(2) {
+    height: 50px;
+    width: 50px;
+    flex-grow: 2;
+    flex-shrink: 2;
+}
+
+/* 
+    grid 布局
+    grid 用字母控制布局， 
+    grid: rows / columns, like: grid: repeat(3, 1fr) / repeat(3, 1fr), grid: 1fr 2 fr 3fr / 1fr 2fr 3fr
+    grid-auto-flow: grid 的显示顺序， dense: 填补空白区域
+    grid-auto-rows: grid rows 高度
+    grid-auto-column: grid columns 宽度
+    grid-template: grid-template-area grid-template-rows / grid-template-columns
+        examplate: 
+            grid-template
+                    "a b c" 1fr
+                    "a b c" 1fr
+                    "b b c" 1fr / repeat(3, 1fr)
+        grid-template-area 区域代码必须是矩形或正方形， grid-template-area should link to grid-area or add element-start element-end
+        grid-template-rows / grid-template-columns: 匹配grid 行数和列数的值或auto, 不可用repeat
+
+    child elements:
+        grid-area: row-start / column-start / row-end / column-end
+        span 2: 跨越两行或列， grid-row-start: 1 从第一行开始， 包含第一行， grid-row-end: 3 到第三行结束，不包含第三行， 如果开始是grid-row-start: 1，等价与 span 2. 
+        grid-column: start / end, grid-rows: start / end
+        grid-column-start/ grid-row-start: 可以为 -1，从最后开始布局，注意grid column or row 是否会增加, testing没有增加，但mdn上的增加一行或列
+        grid-column-end: 为-1, 放在最后, 其他负值不起作用 正数和span 3 通用意义
+        grid-row-end: 可以为负整数，会增加新column or row，只是从最后开始, 
+    
+    display: contents; 不会对flex,grid layout产生影响，让他们作用与子元素
+*/
+.grid-container {
+    height: auto;
+    display: grid;
+    grid: 500px / repeat(3, 1fr);
+    gap: 10px;
+}
+
+.grid-container * {
+    height: auto;
+}
+
+.grid {
+    width: 100%;
+    height: 500px;
+    display: grid;
+    gap: 5px;
+    grid-template:
+        'a a a' 1fr
+        'b c c' 1fr
+        'b c c' 1fr / 1fr 1fr 1fr;
+}
+
+.grid div {
+    height: auto;
+}
+
+.a {
+    grid-area: a;
+    background-color: rgb(207, 54, 184);
+}
+
+.b {
+    grid-area: b;
+    background-color: rgb(199, 237, 26);
+}
+
+.c {
+    grid-area: c;
+    background-color: rgb(13, 233, 192);
+}
+
+.grid-1 {
+    display: grid;
+    grid: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 10px;
+    grid-auto-flow: row;
+    width: 400px;
+    height: 300px;
+}
+
+.grid-1 div {
+    background-color: chartreuse;
+}
+
+.grid-1 div:nth-child(1) {
+    grid-column: 3 / -1;
+}
+
+.grid-1 div:nth-child(2) {
+    grid-row-start: -1;
+    grid-row-end: 2;
+}
+
+.grid-1 div:nth-child(3) {
+    grid-area: 2 / 2 / 3 / 4;
+}
+
+/* 
+    animation: 
+        1. example: transition: font-size 3s 2s ease-in-out
+                               变化属性，变化持续时间，多长时间后变化，变化的速度
+        2. example: animation-name: test 
+                    @keyframes test
+                    keyframes 包含 from(0%), to(100%), 多个值变化的时候，不想用all, 不必每一条 + 时间
+                    animation-delay | animation-duration | animation-fill-mode | animation-timing-function
+                    开始等待时间      | 变化持续时间         | 变化最后状态，默认回到最初| 变化速度
+    
+*/
+.animation-container {
+    height: auto;
+}
+
+.animation-1 {
+    font-size: 10px;
+    transition: font-size 3s 1s;
+}
+
+.animation-1:hover {
+    font-size: 36px;
+}
+
+.animation-2 {
+    animation-duration: 3s;
+    animation-delay: 2s;
+    /* ease：代表中间加速，end减速， ease-in代表开始慢，end快 */
+    animation-timing-function: ease;
+    animation-name: animation-key-name;
+    animation-fill-mode: forwards;
+}
+
+@keyframes animation-key-name {
+    0% {
+        font-size: 12;
+        background-color: red;
+    }
+
+    50% {
+        font-size: 36;
+        background-color: blue;
+    }
+
+    100% {
+        font-size: 24;
+        background-color: green;
+    }
+}

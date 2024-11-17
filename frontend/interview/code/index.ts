@@ -123,3 +123,16 @@ function findKOr(nums: number[], k: number): number {
     return res;
 }
 console.log(findKOr([7, 12, 9, 8, 9, 15], 4));
+
+function climbStairs(n: number): number {
+    let dp: number[] = [];
+    dp[0] = 1;
+    dp[1] = 1;
+    for (let i = 2; i < n + 1; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+
+    return dp[n];
+}
+
+Number.isNaN('');

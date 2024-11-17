@@ -1,3 +1,5 @@
+# After you get a new computer, you should use this shell install all the tools to make you work easily.
+
 #  You must confirm the network can be visit the github and other tools download link
 #  If you can't visit the github, please add the 140.82.112.4    github.com to /ect/hosts
 #  Other tools maybe have the different ip, please search them and add it.

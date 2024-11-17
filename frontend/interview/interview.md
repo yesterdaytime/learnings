@@ -99,6 +99,10 @@
     3. constructor 检测所有类型
     4. Object.prototype.toString.call() 用类的 toString 去判断
 
+-   Object.defineProperty
+
+    可以在 Object 中添加特殊方法，也可以在特定 object 中修改特定 key 的属性和值，常用于设定 object 中的值可更改与否。
+
 -   闭包的特点
 
     闭包是函数嵌套另一个函数， 并且内部函数被外部函数返回
@@ -221,6 +225,43 @@
     2. 没有 prototype
     3. 不能使用 new
     4. 能处理普通函数无法访问的 this，不如数组循环中访问 this.
+
+-   装饰器函数
+
+    在 TypeScript 中，装饰器（Decorators）是一种特殊类型的声明，它可以附加到类声明、方法、属性或参数上。装饰器使用 @expression 的形式，其中 expression 必须求值为一个函数，该函数将在运行时被调用，作为被装饰的声明的一部分。
+
+    ```
+        function log(target: any, methodName: string, descriptor: TypedPropertyDescriptor<any>) {
+            ....
+        }
+    ```
+
+    函数有三个参数
+
+    target: 原型
+
+    methodName: 方法名或属性名
+
+    descriptor: descriptor（一个具有可配置（configurable）和可枚举（enumerable）属性的对象）
+
+    类声明的时候，只能有一个参数，就是类原型
+
+    属性声明有两个参数，类原型和属性名
+
+    方法声明有三个参数，常用的是第三个参数， descriptor.value 是装饰器标识的 function
+
+    ```
+    function log(target: any, methodName: string, descriptor: TypedPropertyDescriptor<any>) {
+        let originalMethod = descriptor.value;
+        descriptor.value = function (...args: any[]) {
+            console.log(`Calling: ${methodName}(${args.join(', ')})`);
+            let result = originalMethod.apply(this, args);
+            console.log(`Called: ${methodName}`);
+            return result;
+        };
+    }
+
+    ```
 
 -   script 标签的 defer 和 async 作用和不同
 
@@ -874,6 +915,72 @@
     客户端和服务器之间的通讯便利
     支持依赖注入
 
+-   angular ChangeDetectionStrategy
+
+    Default: 值变化，会跟着更新
+
+    OnPush: Input 变化，会更新
+
+-   angular ChangeDetectorRef
+
+    detach: 分离变化检测器
+
+    reattach：如果需要重新连接变化检测器，可以调用 reattach() 方法
+
+    detectChanges： 手动触发变化检测器
+
+-   StandAlone
+
+    @if @else | @swith @case @default | @for @empty
+
+    @defer @loading @placeholder @error
+
+    | trigger                        | Triggers...                                   |
+    | ------------------------------ | --------------------------------------------- |
+    | on idle                        | when the browser reports idle state (default) |
+    | on viewport(\<elementRef>?)    | when the element enters the viewport          |
+    | on interaction(\<elementRef>?) | when clicked, touched, or focused             |
+    | on hover(\<elementRef>?)       | when element has been hovered                 |
+    | on immediate                   | when the page finishes rendering              |
+    | on timer(\<duration>)          | after a specific timeout                      |
+    | when <condition>               | on a custom condition                         |
+
+-   如何规避循环依赖
+
+    1. 将一个依赖的部分抽到一个公共部分，删除依赖
+    2. 通过 forwardRef 来延迟加载，删除 eslint 中的 circularities dependence.
+
+-   angular animations
+
+    定义两个状态和样式，然后从左到右和从右到左的状态变化和对应的时间
+
+    ```
+        animations: [
+            trigger('openClose', [
+                state('open', style({
+                    height: '*',
+                    opacity: 1,
+                    backgroundColor: 'yellow'
+                })),
+                state('closed', style({
+                    height: '0px',
+                    opacity: 0,
+                    backgroundColor: 'transparent'
+                })),
+                transition('open => closed', [
+                    animate('1s')
+                ]),
+                transition('closed => open', [
+                    animate('0.5s')
+                ])
+            ])
+        ]
+    ```
+
+-   angular inject
+
+    在 angular 中，可以用 inject 取 service， HttpContextToken 可以存储值
+
 -   ts genericity
 
     ```
@@ -886,6 +993,34 @@
         };
 
     ```
+
+-   angular http client
+
+    intercepter 支持两个参数，req, next， 你可以在 req 中加参数，也可以在 next 之后处理返回的结果，通常用 interceptor 加 token，处理 401refresh，和统一错误处理之类的
+
+    请求参数：
+
+         observe: 'response'： 返回http response, 带请求状态和body
+
+         responseType: 默认 json, 也支持其他类型：blob， arraybuffer， text
+
+         reportProgress： 更新进度条，event type为 HttpEventType.UploadProgress，则表示在进行中， HttpEventType.Response 表示upload完成
+
+-   angular AOT 流程
+
+    AOT: Ahead-of-time
+
+    | 阶段         | 详情                                                                                                                                                                 |
+    | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | 代码分析     | 在此阶段，TypeScript 编译器和 AOT 收集器创建源代码的表示。收集器不会尝试解释它收集的元数据。它会尽可能地表示元数据，并在检测到元数据语法违规时记录错误。             |
+    | 代码生成     | 在此阶段，编译器的 StaticReflector 解析在第一阶段收集的元数据，对元数据进行额外验证，并在检测到元数据限制违规时引发错误。                                            |
+    | 模板类型检查 | 在这个可选阶段，Angular 模板编译器使用 TypeScript 编译器来验证模板中的绑定表达式。您可以通过设置 strictTemplates 配置选项显式启用此阶段；请参阅 Angular 编译器选项。 |
+
+    简单来说，
+
+    1. typescript 编译成\*.d.ts，AOT 收集器收集元数据到.metadata.json，这步不关心错误。
+    2. 根据特定的规则解析 metadata.json，对一些不符合规则的代码进行重写
+    3. 类型和规则检查
 
 -   RegExp
 
@@ -925,3 +1060,72 @@
     为此， React 将构建一个新的 React 虚拟 DOM 树（可以将其视为页面 DOM 元素的对象表示方式）。
     一旦有了这个 DOM 树，为了弄清 DOM 是如何响应新的状态而改变的， React 会将这个新树与上一个虚拟 DOM 树比较。
     这样做， React 会知道发生的确切变化，并且通过了解发生的变化后，在绝对必要的情况下进行更新 DOM，即可将因操作 DOM 而占用的空间最小化。
+
+-   react hooks
+
+    useState: 更新视图用的，只有绑定 state 的变量变化才会重新渲染
+
+        当需要在函数组件中管理状态时，如计数器、表单输入等
+
+    useEffect: 处理 state 变化引起的副作用，在 angular 中，我们有时候会在 set 中做其他操作，类似这个
+
+        需要在组件渲染后或某些状态改变后执行一些副作用操作时，如数据请求、清理操作等
+
+        当useEffect返回function, 会在component销毁的时候执行，在类组件中，可以调用componentDidUnMoment
+
+        useEffect 参数数组如果为空，只在加载和卸载组件的时候执行
+
+    useContext: 允许你在组件树中跨多层级访问 React 的 Context 值，而无需手动逐层传递 props
+
+        当需要在多个层级嵌套的组件之间共享数据，如用户认证信息、主题设置、语言偏好等
+
+    useRef: “勾住”某些组件挂载完成或重新渲染完成后才拥有的某些对象，并返回该对象的引用
+
+        获取DOM元素或DOM元素的引用
+
+        存储不会触发组件重新渲染的变量（如计时器ID、之前的状态值等）
+
+-   react 的逻辑
+
+    每次变化，都会重新执行对应的 component,重新解析 js 并建立 dom,参数在 useState 中会保存变化，不在里面的，每次都会初始化，所以不会显示变化。
+
+    useEFfect 只有在值变化的时候才会执行
+
+-   react 如何取消请求
+
+    AbortController 可以取消已有的 event, request, 但每次 abort 之后，需要重新实例化，通常定义一个 service,
+    在 service 中 share AbortController 实例，每次 abort 之后，会重新定义一个新的 AbortController 实例，
+    在取 signal 也从 service 中取值。
+
+    angular 可以利用 switchMap 取消已经发出去的请求。
+
+-   Typescript types
+
+    接口和 type 的区别:
+
+            接口主要描述对象结构。
+
+            type主要是对已有数据结构的重组，联合，交叉。常用于递归解析数据结构，interface别名，联合type和interface等。
+
+            接口可以作为是class实现的规范，同时定义function, type 可以定义所有接口的行为，但是数据结构
+
+    example
+
+        infer 声明一个临时的类型，可以在后面进行判断, 除了object和数组，其他由json过来的数据都认为是基本类型
+
+    ```
+        export type FormGroupType<T> = {
+            [K in keyof T]: T[K] extends Array<infer E>
+                ? E extends Object
+                    ? Array<FormGroupType<E>>
+                    : Array<E>
+                : T[K] extends Object
+                ? FormGroupType<T[K]>
+                : T[K];
+        };
+
+    ```
+
+-   typescript 特殊操作
+
+    ??: 判断是不是 null or undefined，其他空值为 true。

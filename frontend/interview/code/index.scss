@@ -16,6 +16,10 @@ body {
         color: blue;
     }
 
+    .yellow {
+        color: yellow;
+    }
+
     .bg-red {
         background-color: red;
     }
@@ -31,18 +35,19 @@ body {
 
     #priority  {
         .container {
-            color: yellow;
+            
+            @extend .yellow;
 
             #child1 {
-                color: blue;
+                @extend .blue;
             }
 
             #child2 {
-                color: red;
+                @extend .red;
             }
 
             .child {
-                color: green;
+                @extend .green;
             }
         }
     }

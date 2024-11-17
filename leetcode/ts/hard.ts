@@ -121,6 +121,43 @@ class HardLeetCode {
 
         return 0;
     }
+
+    minOperationsQueries(
+        n: number,
+        edges: number[][],
+        queries: number[][]
+    ): number[] {
+        return queries.map((query) => {
+            let [start, end] = query;
+            if (start < 0 || end > n - 1) {
+                return 0;
+            }
+
+            let selected: number[][] = [],
+                weights: number[] = [];
+            const findLeft = (current: number) => {
+                let left = edges.find(
+                    (edge) =>
+                        edge[1] === current &&
+                        !selected.some((select) => select === edge)
+                );
+                if (left) {
+                    selected.push(left);
+                    weights.push(left[2]);
+
+                    if (left[1] === end) {
+                        weights.push(left[2]);
+                    } else {
+                        findLeft(left[0]);
+                    }
+                }
+            };
+
+            findLeft(start);
+
+            return 0;
+        });
+    }
 }
 
 const hleetCode = new HardLeetCode();
