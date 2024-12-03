@@ -1,0 +1,232 @@
+/** 参数 less 可以先用，然后再定义 */
+
+@link-color: #428bca; // sea blue
+@link-color-hover: darken(@link-color, 10%);
+@my-selector: banner;
+
+a,
+.link {
+    color: #fff;
+    background: @link-color;
+}
+a:hover {
+    @hover-color: link-color-hover;
+    color: @@hover-color;
+}
+
+// 放在在前面用参数值需要用@{}
+.@{my-selector} {
+    font-weight: bold;
+    line-height: 40px;
+    margin: 0 auto;
+}
+
+/** 嵌套 */
+div {
+    // * = div div, div span { }
+    & &,
+    span {
+        color: blue;
+    }
+
+    // =  div div, div > span { }
+    & > &,
+    & > span {
+        color: green;
+    }
+
+    // =  div + div, div + span { }
+    & + &,
+    & + span {
+        color: red;
+    }
+}
+
+
+// = h1 { }, h2 { }, h3 { }, h4 { }, h5 { }
+// function 是以.或 #开始的，不能直接写，这个算是用css的规则不让编译报错
+ .h-style(@start: 1; @end: 5) {
+    if(@start <= @end, {
+        h${start} {
+            font-size: 10px * $start;
+        }
+        .h-style($start + 1, $end);
+    })
+}
+.h-style();
+
+
+/** extend */
+.a {
+	color: red;
+	.b {
+		color: green;
+
+		.c { 
+			color: blue;
+		}
+	}
+}
+
+// = .a .b div span { color: blue; background: white; }
+div span:extend(.c all) { 
+	background: white;
+};
+
+// 不会继承，.c在.a .b里面，没有all，并不会去里面找, 只能继承同级的
+div:extend(.c) { 
+	background: white;
+};
+
+// = div { color: gray }， 继承不受顺序影响，继承的名字是全匹配,带任何其他东西都不能匹配，如果匹配.d，匹配不到的
+div:extend(.d:hover) { 
+	background: white;
+};
+
+.d:hover {
+	color: gray;
+}
+
+
+// 可以嵌套匹配
+.bucket {
+	tr {
+	  color: blue;
+	}
+}
+
+.div-extend {
+	&:extend(.bucket tr)
+} 
+
+// 参数相关的继承, 继承的对象可以用参数命名，继承的参数不能用参数，只能是具体的selector
+// 继承带参数的selector
+@variable: .bucket;
+@{variable} { // interpolated selector
+  color: blue;
+}
+.div-extend {
+	&:extend(.bucket) // 3.5之后的版本可以匹配到， 3.0 版本无法匹配到，这个在github上有bug tickets
+}
+
+// 继承传入带参数的selector
+.bucket {
+	color: blue;
+}
+.div-extend {
+	&:extend(@{variable}); // 无法继承
+}
+
+// 全部带参数的
+@{variable} {
+	color: blue;
+}
+.div-extend {
+	&:extend(@{variable}); // 无法继承
+}
+
+// 继承的目标selector 为参数
+@{selector} {
+	&:extend(.bucket) // 3.5之后无法继承，3.0可以继承
+}
+@selector: .selector;
+
+// 其实大多数用的继承case都是直接在样式里面写对应的selector就行了
+// 如果.test-blue是需要的样式，不用带括号，不是就带上，这样就不会再最终的css中看到这个样式，取值的时候，带和不带括号一样的效果
+// 不带括号，可以用逗号隔开，带括号的不能
+.text-blue() {
+	color: blue;
+}
+
+.div-extends {
+	.text-blue;
+}
+
+/** merge */
+/** 
+	merge 是less独有的，两个符号 
+	+: 以逗号隔开
+	+_: 以空格隔开
+
+*/
+
+.mixin() {
+	box-shadow+: inset 0 0 10px #555;
+}
+.myclass {
+	.mixin();
+	box-shadow+: 0 0 20px black; // box-shadow: inset 0 0 10px #555, 0 0 20px black;
+}
+
+.mixin() {
+	transform+_: scale(2);
+}
+.myclass {
+	.mixin();
+	transform+_: rotate(15deg); // transform: scale(2) rotate(15deg);
+}
+
+/** mixin 参数以分号隔开*/
+// mixin是less中的样式代码段，可以是一个样式，可以是一个结果返回样式的函数， 在less中， 名称以. #开始，
+#a, .b {
+	color: blue;
+}
+
+#b() {
+	color: red;
+}
+
+// 两种写法都能正确匹配到对应的mixin
+.div-extends {
+	#a;
+	#a();
+	.b;
+	.b();
+	#b;
+	#b();
+}
+
+// 支持重写
+.mixin(@color) {
+	color-1: @color;
+}
+.mixin(@color, @padding: 2) {
+	color-2: @color;
+	padding-2: @padding;
+}
+.mixin(@color, @padding, @margin: 2) {
+	color-3: @color;
+	padding-3: @padding;
+	margin: @margin @margin @margin @margin;
+}
+.some .selector div {
+	.mixin(#008000); // 匹配前两个，样式是合集
+	.mixin(#008000, 2); // 匹配中间两个，样式是合集
+}
+
+// 可以从 mixin中取值，namespace 也是一种mixin
+#outer() {
+	.inner {
+	  color: red;
+	}
+}
+  
+.c {
+	#outer.inner();
+  }
+
+
+/** loop and if */
+// less 没有loop关键字，可以用递归的方式实现
+.h-style(@start: 1; @end: 5) when (@start <= @end) {
+	h@{start} {
+		width: @start * 10px;
+	}
+
+	.h-style(@start + 1, @end);
+}
+
+.h-style();
+
+// if 关键字基本无用，官网的例子也是无法编译通过的，不用关注，所有的if 都可以用when 替代
+// less中的判断和python类似，用and or 和 not，不是用! && ||

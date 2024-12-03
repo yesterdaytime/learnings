@@ -1,4 +1,13 @@
 //#region Symbol
+
+const sym1 = Symbol('description1');
+const sym2 = Symbol('description1');
+const sym3 = Symbol.for('globalSymbol');
+const sym4 = Symbol.for('globalSymbol');
+
+console.log(sym1 === sym2); // false，因为sym1和sym2是两个不同的Symbol
+console.log(sym3 === sym4); // true，因为sym3和sym4是通过相同键'globalSymbol'创建的全局Symbol
+
 let group = {
     title: 'Our Group',
     students: ['John', 'Pete', 'Alice'],
@@ -155,9 +164,8 @@ with (globalVars) {
 
 //#endregion
 
+let obj = {};
 function deepClone(obj, deep) {
-    let obj = {};
-
     Object.keys((key) => {
         if (deep && typeof obj[key] === 'object' && obj[key] !== null) {
             obj[key] = deepClone(obj[key], deep);

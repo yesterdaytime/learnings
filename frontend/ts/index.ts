@@ -1,3 +1,5 @@
+/** @format */
+
 const testing = ['Testing', 'Testing1'] as const;
 
 type testingType = (typeof testing)[number];

@@ -15,8 +15,6 @@
         px： 像素
         rem: 相对于html的font-size做的相对大小， html font-size可以是 px 或 %， % 是 16px * %
 
-    11
-
 -   重绘和重排的区别
 
     重排：布局引擎会根据 css 计算出元素在页面中的位置和大小
@@ -27,6 +25,27 @@
 
     position + margin | transform
     flex
+
+        content 对应的是多行内容， items 对应的是item, 单行的， self是设置每个item的
+        ```
+            div {
+                display: flex;
+
+                place-content: center; /* 可以传递两个值，align-content justify-content, 如果只给一个，默认两个值相同  */
+                align-content: center; /* 作用于多行 */
+                justify-content: center; /* grid 属性，在flex中不起作用 */
+
+                /* flex: 1 1 auto; 等价于下面三行代码 */
+                flex-grow: 1;
+                flex-shrink: 1;
+                flex-basis: auto;
+
+                align-items: center; /* 作用于单行  */
+                justify-items: center; /* 同上 */
+            }
+
+        ```
+
     grid
     table
 
@@ -53,6 +72,138 @@
     2. 嵌套
        嵌套分为属性嵌套和 selector 嵌套
 
+-   如何根据 system 设置 dark, light, 在 auto 模式下也可以区分，你可以在 console 中 check the value
+
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+
+    ```
+    @media (prefers-color-scheme: dark) {
+
+    }
+    ```
+
+-   Sass @use @import @forward 区别
+
+    三个都是导入用的
+
+        @import 是直接导入，可能会有命名冲突，sass 已经暂停对@import 的支持，
+        @use 是@import 的替代，导入时需要定义导入模块名，
+        @forward 支持@use 和 @import 的方式，在 sass 中通常作为整合模块的中转站
+
+    ```
+        // _button.sass
+        .btn-style {
+            background: blue;
+            border-radius: 2px;
+            color: white;
+        }
+
+        @import 'buttons';
+        .new-style {
+            @include .btn-style;
+        }
+
+
+        @user 'buttons' as btn;
+
+        .new-style {
+            @include btn.btn-style;
+        }
+    ```
+
+-   less vs sass
+
+    less 和 sass 都是 css 预处理器，包含的语法类似.
+
+    sass 有 @mixin @include @extend @use @forward @import 等
+
+        参数取值 #{$var}
+
+        mixin： 只接受字符串，不能处理., #之类的selector 样式选择，不支持重写，可以处理默认值
+
+        extend: sass extend做了很多处理，它会判断标签是否合法，重名且中间是空格的会合并，对于空格selector的处理，会将所有可能性的样式selector组合都输出出来，会出现一些意想不到的selector，影响其他布局。这个是很灵活的，记得验证。
+
+        @each: 循环处理一些样式
+
+            $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
+
+            @each $name, $glyph in $icons {
+                .icon-#{$name}:before {
+                    display: inline-block;
+                    font-family: "Icon Font";
+                    content: $glyph;
+                }
+            }
+
+        @if
+
+            $light-background: #f2ece4;
+            $light-text: #036;
+            $dark-background: #6b717f;
+            $dark-text: #d2e1dd;
+
+            @mixin theme-colors($light-theme: true) {
+                @if $light-theme {
+                    background-color: $light-background;
+                    color: $light-text;
+                } @else {
+                    background-color: $dark-background;
+                    color: $dark-text;
+                }
+            }
+
+            .banner {
+                @include theme-colors($light-theme: true);
+                body.dark & {
+                    @include theme-colors($light-theme: false);
+                }
+            }
+
+    less 对应的
+
+        参数取值 @{var}
+
+        mixin: 所有的样式都可以为mixin, 在引用的时候，不需要加任何关键字，直接在里面写样式就行，当然你也可以在样式后面加括号，效果一样，但定义的时候，样式加括号的，不会显示, mixin支持重写，即相同名称，不同参数，会匹配多个，即传递多个值，能同时匹配到后面一个参数为可选的mixin，用@加参数名可以不遵守传参顺序
+
+        extend: :extend()，extend是类似function的函数，里面可以传递组合selector, sass没有组合extend的写法，extend不会判断是否合法，不会合并class, 默认只在当前作用域内找，如果加all，会递归到字作用域内
+        继承里面匹配的是字符串，所以顺序不同的，样式一样也不会匹配
+        用参数名定义继承内的名字，无论怎么操作都不会正确继承，用参数定义继承的名字，在继承内部输入具体的继承名，高版本可以被继承
+        用参数来定义样式名，然后继承其他样式，在高版本，这个是无法真正继承的
+
+        导入： @import
+
+        less 可以批量加!important
+
+
+            .important {
+                .foo() !important;
+            }
+
+        less没有循环的语法，但有when判断条件，在mixin中调用自身，通过when来判断是否中断，可以达到loop的目的
+
+            .generate-columns(4);
+
+            .generate-columns(@n, @i: 1) when (@i =< @n) {
+                .column-@{i} {
+                    width: (@i * 100% / @n);
+                }
+                .generate-columns(@n, (@i + 1));
+            }
+
+        if:
+
+            when 可以做if 用， 用 and, not, or 来表示三种关系
+
+            @dr: if(@my-option = true, {
+                button {
+                    color: white;
+                }
+                a {
+                    color: blue;
+                }
+            });
+            @dr();
+
 # JS
 
 -   js 组成
@@ -75,6 +226,7 @@
     1. map
     2. filter
     3. slice
+    4. with
 
     改变原数组：
 
@@ -85,6 +237,7 @@
     5. pop
     6. unshift
     7. shift
+    8. copyWith
 
     others:
 
@@ -383,6 +536,8 @@
 
     2. JSON.stringify
 
+        JSON.stringify 支持 3 个参数，0: object, 1:通常为 null，返回所有，你可以给一个 key 数组，function,返回固定的 key. 2: format json， 数字代表每行前面几个空格. 详情看 testing 下的[json_stringigy.js](./testing/json_stringify.js)
+
     3. 递归
 
 -   js 事件循环
@@ -550,6 +705,14 @@
 
     npm 组成： npm 网站（仓库）, 注册表， 命令行工具
 
+-   npm vs pnpm vs yarn
+
+    三个都是 js lib 管理工具， npm 是最早的， yarn 是继 npm 之后的，为了解决 npm 依赖和性能问题出现的 pnpm 是新开发的，通过 folder link 解决各种依赖的问题
+
+    npm 与 yarn 文件结构相似，都是通过文件系统来确保每个 lib 和 project 的安装完成，yarn 比 npm 块是因为 yarn 有一个公共缓存，会缓存你下载的所有包， 所以看到比较快。npm yarn 都有对应的版本控制文件，npm 对版本控制文件的依赖没有 yarn 那么强，所以导致有些时候会因为版本不同导致一些问题
+
+    pnpm 是通过文件 link 来关联包的，所以得依赖只会有一份，所以空间更小，速度更快，兼容性和稳定性没有 npm 和 yarn 那么时间的考验，不确定
+
 -   跨域问题解决方案
 
     1. nginx 跨域配置
@@ -603,6 +766,14 @@
     3. keep-alive
     4. 减少接口请求次数
     5. gzip 打包
+
+-   如何保证消息实时通知和接收
+
+    Http Server-Send-event
+
+    WebSocket
+
+    MQTT
 
 -   大文件上传
 
@@ -716,6 +887,16 @@
 -   git 操作
 
     ![git 网图](./image/git.svg)
+
+    代码写一半，想要还原，可以有以下几种方法
+
+        ```
+            git checkout : 只还原修改的
+
+            git reset --hard： 可以还原修改的，也可以还原新增的
+
+            git clean -fd: 可以清理修改的和新增的
+        ```
 
 -   shell
 
@@ -1063,6 +1244,60 @@
 
 -   react hooks
 
+    State Managemant
+
+        useState:
+
+        useReducer
+
+        useSyncExternalStore
+
+    Ref Hooks
+
+        useRef
+
+        useImprativeHandle
+
+    Effect Hooks
+
+        useEffect
+
+        useLayoutEffect
+
+        useInsertionEffect
+
+    Context Hooks
+
+        useContext
+
+    Random Hooks
+
+        useDebugValue
+
+        useId
+
+    Transition Hooks
+
+        useTransition
+
+        useDefferedValue
+
+    Performance Hooks
+
+        useMemo
+
+        useCallBack
+
+    React 19
+
+        useFormStatus
+
+        useFormState
+
+        useOptimistic
+
+        use
+
     useState: 更新视图用的，只有绑定 state 的变量变化才会重新渲染
 
         当需要在函数组件中管理状态时，如计数器、表单输入等
@@ -1114,14 +1349,10 @@
         infer 声明一个临时的类型，可以在后面进行判断, 除了object和数组，其他由json过来的数据都认为是基本类型
 
     ```
-        export type FormGroupType<T> = {
-            [K in keyof T]: T[K] extends Array<infer E>
-                ? E extends Object
-                    ? Array<FormGroupType<E>>
-                    : Array<E>
-                : T[K] extends Object
-                ? FormGroupType<T[K]>
-                : T[K];
+        export type FormControlType<T> = FormControl<T> & {
+            [P in keyof T]: T[P] extends Array<infer U>
+                ? FormArray<FormControlType<U>>
+                : FormControl<T[P]>;
         };
 
     ```
@@ -1129,3 +1360,143 @@
 -   typescript 特殊操作
 
     ??: 判断是不是 null or undefined，其他空值为 true。
+
+-   tsconfig
+
+    通常有 target 决定你编译后的结果，module 决定你 export import 的结果，lib 决定哪些 es 特性你能用
+
+    -   ‌compilerOptions‌: 这是一个对象，包含了 TypeScript 编译器的所有配置选项。
+
+        -   ‌target‌: 指定 ECMAScript 目标版本，如 ES3、ES5、ES6/ES2015、ES2016、ES2017、ES2018、ES2019、ES2020、ES2021、ESNext 等。决定你的 code 编译结果
+        -   ‌module‌: 指定模块化系统，如 commonjs、amd、system、umd、es6/es2015、es2020、esnext 等。Module 决定 export import 以哪个版本来编译
+        -   ‌lib‌: 指定要包含在编译中的库，如 dom、dom.iterable、webworker、scripthost、es5、es6/es2015、es2016、es2017、es2018、es2019、es2020、es2021、esnext 等。库的编译结果
+        -   ‌allowJs‌: 允许在 TypeScript 项目中包含 JavaScript 文件。
+        -   ‌outDir‌: 指定输出目录。
+        -   ‌rootDir‌: 指定根目录，用于解析相对模块导入。
+        -   ‌strict‌: 启用所有严格类型检查选项。
+        -   ‌noImplicitAny‌: 在表达式和声明中有隐含的 any 类型时发出错误。
+        -   ‌strictNullChecks‌: 启用严格的空值检查。
+        -   ‌strictFunctionTypes‌: 启用严格的函数类型检查。
+        -   ‌strictBindCallApply‌: 启用严格的 bind、call 和 apply 方法检查。
+        -   ‌strictPropertyInitialization‌: 启用严格的属性初始化检查。
+        -   ‌noImplicitThis‌: 在没有明确指定 this 类型时发出错误。
+        -   ‌alwaysStrict‌: 以严格模式解析，并为每个文件生成 "use strict" 指令。
+        -   ‌noUnusedLocals‌: 报告未使用的局部变量。
+        -   ‌noUnusedParameters‌: 报告未使用的参数。
+        -   ‌noImplicitReturns‌: 在函数不是所有分支都有返回值时发出错误。
+        -   ‌noFallthroughCasesInSwitch‌: 报告 switch 语句中未处理的 case。
+        -   ‌allowSyntheticDefaultImports‌: 允许从没有默认导出的模块中导入默认导出。
+        -   ‌esModuleInterop‌: 启用 ECMAScript 模块互操作性，允许 import \* as 从 CommonJS 模块导入。
+        -   ‌preserveSymlinks‌: 保留符号链接，解析模块时使用真实路径。
+        -   ‌forceConsistentCasingInFileNames‌: 强制在导入文件时保持大小写一致性。
+        -   ‌skipLibCheck‌: 跳过对声明文件（\*.d.ts）的类型检查。
+        -   ‌noEmit‌: 不生成输出文件。
+        -   ‌emitDeclarationOnly‌: 只生成 .d.ts 文件，不生成 .js 文件。
+        -   ‌sourceMap‌: 生成源映射文件（.map），用于调试。
+        -   ‌inlineSourceMap‌: 将源映射嵌入到输出文件中。
+        -   ‌inlineSources‌: 将源文件嵌入到输出文件中。
+        -   ‌experimentalDecorators‌: 启用实验性装饰器支持。
+        -   ‌emitDecoratorMetadata‌: 发出装饰器元数据，供运行时使用。
+        -   ‌types‌: 指定要包含的额外类型声明文件。
+        -   ‌moduleResolution‌: 指定模块解析策略，如 node、classic。
+        -   ‌baseUrl‌: 指定基本目录，用于解析非相对模块导入。
+        -   ‌paths‌: 指定模块路径的映射。
+        -   ‌rootDirs‌: 指定根目录的列表，用于解析相对模块导入。
+        -   ‌listEmittedFiles‌: 列出编译过程中发出的文件。
+        -   ‌listFiles‌: 列出编译过程中涉及的所有文件。
+        -   ‌suppressImplicitAnyIndexErrors‌: 抑制对隐含 any 索引签名的错误。
+        -   ‌suppressExcessPropertyErrors‌: 抑制对象字面量中多余属性的错误。
+        -   ‌include‌: 一个数组，指定要包含在编译中的文件或目录。
+
+    -   ‌exclude‌: 一个数组，指定要排除在编译之外的文件或目录。
+    -   ‌extends‌: 指定一个基础配置文件，当前配置会继承基础配置中的选项。
+    -   ‌compileOnSave‌: 在保存文件时自动编译（通常用于 IDE 环境，如 Visual Studio）。
+    -   ‌files‌: 一个数组，指定要编译的单个文件列表（通常与 include 和 exclude 结合使用）。
+    -   ‌references‌: 在使用项目引用时，指定要引用的其他 TypeScript 项目的路径。
+
+angular schematics
+
+    创建angular schematics流程：
+
+
+    1. 创建collection.json，在里面配置schematics实例
+    2. 创建schema.json，index.ts,template files, schema.ts
+    3. copy创建模板，并在schema.json中设置需要的参数和选项
+    4. 在template中根据你的需要设置模板
+
+    如果你在files中有多个文件，会一并生成，同时也可以生成多个文件内的template,用chain合并所有mergeWith(templateSource)
+
+
+    ```
+
+    {
+        "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+        "schematics": {
+             "my-service": {
+                "description": "Generate a service in the project.",
+                "factory": "./my-service/index#myService",
+                "schema": "./my-service/schema.json"
+            }
+        }
+    }
+
+
+
+
+    ├── collection.json
+    ├── datagrid
+    │   ├── files
+    │   │   └── __name@dasherize__.service.ts.template
+    │   ├── index.ts
+    │   ├── schema.json
+    │   └── schema.ts
+    ├── package.json
+    └── tsconfig.schematics.json
+
+
+    __name@dasherize__:将你传递的name变成短横线隔开的形式
+    camelize‌： 将单词转成驼峰
+    classify‌： 将单词转成首字母大写的单词
+    underscore‌： 将单词转成下滑下隔开的单词
+
+    ```
+
+webpack federation modules
+
+    ```
+        const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+
+        module.exports = {
+
+            plugins: [
+                new ModuleFederationPlugin({
+                name: "app_name",                           // 1. 应用名称，用于唯一标识当前应用
+                filename: "remoteEntry.js",                // 2. 生成的清单文件名，这个文件包含了暴露和共享的模块信息
+                exposes: {                                 // 3. 暴露给其他应用的模块
+                    "./Component": "./src/Component.js",     // 键是暴露给外界的模块名，值是本地模块的路径
+                },
+                remotes: {                                 // 4. 从其他应用消费的模块
+                    app_b: "app_b@http://localhost:3001/remoteEntry.js", // 键是远程应用的名称，值是该应用的清单文件URL
+                },
+                shared: ["react", "react-dom"]             // 5. 与其他应用共享的依赖项
+                }),
+            ],
+        };
+
+        ```
+
+    ‌eager: true‌:
+
+    ‌预加载‌: Webpack 会在构建时尝试预先加载所有标记为共享的模块。这意味着，即使这些模块在当前的应用中并没有立即被使用，它们也会被包含在最终的构建文件中。
+    ‌性能‌: 预加载可以减少在应用运行时加载共享模块所需的时间，因为它们在构建时已经被加载并准备好了。然而，这可能会增加初始构建的大小和加载时间，因为所有的共享模块都会被预先加载。
+    ‌使用场景‌: 适用于那些希望减少运行时加载时间，并且可以接受较大初始构建大小的应用。
+
+    ‌eager: false‌（或未设置 eager 属性，因为默认值通常是 false）:
+
+    ‌按需加载‌: 共享模块只会在应用运行时被加载，当且仅当它们被实际使用时。这意味着，如果某个共享模块在当前应用中没有被使用，它就不会被包含在最终的构建文件中。
+    ‌性能‌: 按需加载可以减少初始构建的大小和加载时间，因为只有实际使用的模块会被加载。然而，这可能会增加运行时加载共享模块的时间，因为需要在应用运行时动态地加载它们。
+    ‌使用场景‌: 适用于那些希望减小初始构建大小，并且可以接受运行时加载时间可能稍微增加的应用。
+
+-   代码分析
+
+    1. webpack-bundle-analyzer

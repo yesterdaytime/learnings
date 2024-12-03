@@ -1,0 +1,258 @@
+/** @format */
+
+@use 'sass:map';
+
+/** 参数  scss 参数需先定义，后用*/
+$link-color: #428bca; // sea blue
+$link-color-hover: #3071a9;
+$my-selector: banner;
+
+$map-object: (
+    link-color-hover: $link-color-hover,
+);
+
+a,
+.link {
+    color: #fff;
+    background: $link-color;
+}
+// scss 不支持根据传参获取参数，但你可以用map.get实现类似的功能
+a:hover {
+    $hover-color: link-color-hover;
+    color: map.get($map-object, $hover-color);
+}
+
+// 放在在前面用参数值需要用${}
+.#{$my-selector} {
+    font-weight: bold;
+    line-height: 40px;
+    margin: 0 auto;
+}
+
+/** 嵌套 */
+div {
+    // * = div div, div span { }
+    & &,
+    span {
+        color: blue;
+    }
+
+    // =  div div, div > span { }
+    & > &,
+    & > span {
+        color: green;
+    }
+
+    // =  div + div, div + span { }
+    & + &,
+    & + span {
+        color: red;
+    }
+
+    // = .root-style { }, 这个会被移到div 外层，按层级关系，不建议这样写，特殊case可以用，
+    // 比如mixin生成样式，出来就是最终需要的样式，可以用
+    @at-root .root-style {
+        color: white;
+    }
+}
+
+// = h1 { }, h2 { }, h3 { }, h4 { }, h5 { }
+// * 换成div 或其他标签一样的效果
+@mixin h-style($start: 1, $end: 5) {
+    @if $start <= $end {
+        @at-root h#{$start} {
+            font-size: 10px * $start;
+        }
+        @include h-style($start + 1, $end);
+    }
+}
+
+* {
+    @include h-style();
+}
+
+/** extend */
+.a {
+    color: red;
+    .b {
+        color: green;
+
+        .c {
+            color: blue;
+        }
+    }
+}
+
+/* 会生成两组
+    .a .b div span, div .a .b span { color: blue; background: white; } 
+    scss 继承会合并重复的selector且去掉不合法的selector
+    当遇到组合selector，无法确定前面的selector 和继承的selector什么关系，会生成两组，
+    最后的selector 之外的selector 会放到最前面，生成另外一组
+*/
+div span {
+    @extend .c;
+    background: white;
+}
+
+// = div { color: gray }
+div {
+    @extend .d;
+    background: white;
+}
+
+.d {
+    color: gray;
+}
+
+// scss 不会嵌套继承，只能将需要嵌套继承的拿出来，然后继承， %开头的不会再最终的css中出现，和less中的带括号的selector 效果类似
+%blue-text {
+    color: blue;
+}
+
+.bucket {
+    tr {
+        @extend %blue-text;
+    }
+}
+
+.div-extend {
+    @extend %blue-text;
+}
+
+// 参数相关的继承
+
+$variable: '.bucket';
+
+#{$variable} {
+    // interpolated selector
+    color: blue;
+}
+.div-extend {
+    @extend .bucket; // 可以继承
+}
+
+.div-extend {
+    @extend #{$variable}; // 可以继承
+}
+
+// 必须先定义参数，才能用
+$selector: '.selector';
+#{$selector} {
+    @extend .bucket; // 可以继承
+}
+
+/** merge */
+/* 
+    sass 不提供 merge 功能，你可以用mixin实现
+ */
+
+/** mixin, 参数以逗号隔开 */
+// mixin 带括号和不带在没有参数的情况下是一样的,都能用带括号和不带括号来访问
+// sass 遇到相同名称的mixin，以最后遇到的为准。下面的三个是以 mixin-style($color) 为最终结果
+@mixin mixin-style {
+    color: blue;
+}
+
+@mixin mixin-style() {
+    color: green;
+}
+
+@mixin mixin-style($color) {
+    color: $color;
+}
+
+// sass 不支持重写，只能给默认值
+@mixin mixin-style($color: white) {
+    color: $color;
+}
+
+// 可以用@content在用的地方设置样式
+@mixin hover {
+    &:not([disabled]):hover {
+        @content;
+    }
+}
+
+.button {
+    border: 1px solid black;
+    @include hover {
+        border-width: 2px;
+    }
+}
+
+// 如果想从一个object中拿参数，可以用map.get, list 需要用 list.nth, 不过基本上是用@each 或者递归来玩
+$font-style: (
+    font-size: 24px,
+    font-weight: 400,
+);
+
+body {
+    font-size: map.get($font-style, 'font-size');
+    font-weight: map.get($font-style, 'font-weight');
+}
+
+/** loop and if */
+
+$list1: a, b, c, d, e, f;
+
+$list2: ((1, 2, 3, 4), (2, 3, 5, 9), (1, 3, 4, 7), (2, 3, 1, 5));
+
+// 可以用@each 来遍历，或者用list.nth, list.index, list.append 来处理
+
+@each $item in $list1 {
+    @debug $item;
+}
+
+@each $a, $b, $c, $d in $list2 {
+    @debug $a $b $c $d;
+}
+
+//  For loop
+$base-color: #036;
+
+@for $i from 1 through 3 {
+    ul:nth-child(3n + #{$i}) {
+        background-color: lighten($base-color, $i * 5%);
+    }
+}
+
+// while
+@function scale-below($value, $base, $ratio: 1.618) {
+    @while $value > $base {
+        $value: math.div($value, $ratio);
+    }
+    @return $value;
+}
+
+$normal-font-size: 16px;
+sup {
+    font-size: scale-below(40px, 16px);
+}
+
+// if example
+$light-background: #f2ece4;
+$light-text: #036;
+$dark-background: #6b717f;
+$dark-text: #d2e1dd;
+
+@mixin theme-colors($light-theme: true) {
+    @if $light-theme {
+        background-color: $light-background;
+        color: $light-text;
+    } @else {
+        background-color: $dark-background;
+        color: $dark-text;
+    }
+}
+
+.banner {
+    @include theme-colors($light-theme: true);
+    body.dark & {
+        @include theme-colors($light-theme: false);
+    }
+}
+
+/* Function */
+// sass function 有许多限制， 不能包含style， 不能用@at-root @include这类操作style的关键字，
+// 算是mixin的子集，但不必像mixin那样只能用@include导入，可以直接用,
+// 和 mixin 一样不能再文件中直接用，都是作为属性值在用

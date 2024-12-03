@@ -1,3 +1,5 @@
+/// <reference lib="es2023" />
+
 function sealed(constructor: Function) {
     Object.seal(constructor);
     Object.seal(constructor.prototype);
@@ -23,9 +25,9 @@ class MyClass {
     public myProperty = 'Hello';
 }
 
-const obj = new MyClass();
-console.log(obj.myProperty); // Get: myProperty => Hello
-obj.myProperty = 'World'; // Set: myProperty => World
+let objTest = new MyClass();
+console.log(objTest.myProperty); // Get: myProperty => Hello
+objTest.myProperty = 'World'; // Set: myProperty => World
 
 @sealed
 class Greeter {

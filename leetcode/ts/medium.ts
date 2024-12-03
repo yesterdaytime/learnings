@@ -10,6 +10,7 @@ export class ListNode {
     }
 }
 class MediumLeetCode {
+    //#region worked and tested function
     addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
         let val = 0,
             carry = 0,
@@ -32,7 +33,7 @@ class MediumLeetCode {
 
         return result.next;
     }
-    //#region
+
     splitNum(num: number): number {
         let sortedStr = String(num)
             .split('')
@@ -147,7 +148,6 @@ class MediumLeetCode {
             for (let j = s.length - 1; j - i >= longStr.length; j--) {
                 if (s[i] === s[j]) {
                     let checkStr = s.slice(i, j + 1);
-                    console.log(checkStr);
                     if (this.isLongestPalindrome(checkStr)) {
                         console.log('isLongest', checkStr);
                         longStr = checkStr;
@@ -419,6 +419,29 @@ class MediumLeetCode {
         return false;
     }
 
+    longestPalindrome2(s: string) {
+        let dp: Array<boolean>[] = Array.from(s).map(() => []),
+            maxStr = '';
+
+        for (let j = 0; j < s.length; j++) {
+            for (let i = 0; i <= j; i++) {
+                if (i === j) {
+                    dp[i][j] = true;
+                } else if (j - i === 1) {
+                    dp[i][j] = s[i] === s[j];
+                } else {
+                    dp[i][j] = dp[i + 1][j - 1] && s[i] === s[j];
+                }
+
+                if (j - i >= maxStr.length && dp[i][j]) {
+                    console.log(i, j);
+                    maxStr = s.substring(i, j + 1);
+                }
+            }
+        }
+
+        return maxStr;
+    }
     gNodeList(list: number[]): ListNode | null {
         let result: ListNode | null = null,
             temp: ListNode | null = null;
@@ -441,6 +464,36 @@ class MediumLeetCode {
             l = l.next;
         }
         return list;
+    }
+    //#endregion
+
+    //#region  Working function
+
+    longestPalindromeSubseq(s: string): number {
+        const dp: number[][] = Array.from(s).map(() =>
+            Array.from(s).map(() => 1)
+        );
+        let max = s.length ? 1 : 0;
+
+        for (let j = 0; j < s.length; j++) {
+            for (let i = 0; i < j; i++) {
+                if (j - i === 1) {
+                    dp[i][j] = s[i] === s[j] ? 2 : 0;
+                } else if (s[i] === s[j]) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
+
+                if (dp[i][j] > max) {
+                    max = dp[i][j];
+                }
+            }
+        }
+
+        console.log(dp);
+
+        return max;
     }
     //#endregion
 }
@@ -485,13 +538,17 @@ const mleetCode = new MediumLeetCode();
             [1, 1, 1, 2, 1],
         ])
     );
+    console.log(
+        mleetCode.dListNode(
+            mleetCode.addTwoNumbers(
+                mleetCode.gNodeList([9, 9, 9, 9, 9, 9, 9]),
+                mleetCode.gNodeList([9, 9, 9, 9])
+            )
+        )
+    );
+
+    console.log(mleetCode.longestPalindrome('aacabdkacaa'));
+    console.log(mleetCode.longestPalindrome2('cbbd'));
 });
 
-console.log(
-    mleetCode.dListNode(
-        mleetCode.addTwoNumbers(
-            mleetCode.gNodeList([9, 9, 9, 9, 9, 9, 9]),
-            mleetCode.gNodeList([9, 9, 9, 9])
-        )
-    )
-);
+console.log(mleetCode.longestPalindromeSubseq('abcabcabcabc'));
