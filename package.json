@@ -2,7 +2,7 @@
     "name": "learnings",
     "version": "1.0.0",
     "description": "This is repo for learning something, I will update this for myself, so the file structure is small chaotic.",
-    "main": "index.js",
+    "main": "index.mjs",
     "type": "commonjs",
     "dependencies": {
         "acorn": "^8.11.3",
@@ -21,6 +21,9 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
+    "workspaces": [
+        "./express/*"
+    ],
     "author": "",
     "license": "ISC"
 }

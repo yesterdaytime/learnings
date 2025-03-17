@@ -57,6 +57,17 @@
     4. 表格布局
     5. 列表属性
 
+-   columns
+
+    区别于 flex 和 grid， 这个是自动调节的
+
+    出来的效果是 columns 对齐的， 不同于常规的 row 对齐
+
+-   light-dark
+
+    light-dark(#fff, #000)
+    两个值，分别对应 light 和 dark
+
 -   scss
 
     1. 变量
@@ -434,6 +445,12 @@
     3. script defer loaded
 
         ![script defer loaded](./image/script%20defer%20load.png)
+
+-   如何优化 createElement
+
+    createElement 本身是创建元素的，但频繁的更改元素会造成 dom 频繁更改，dom 更改是个很耗资源的操作，可以用 createDocumentFragment 先把每部分创建出来，然后将整个 fragment append 到 dom 中。
+
+    框架比直接更改快，是应为会将多次更改一次修改 dom。
 
 -   es6 或者说 es2015 新增了哪些特性
 
@@ -1216,6 +1233,16 @@
     2. i: 忽略大小写
     3. m: 换行匹配
 
+-   react 看源码顺序
+
+    1. react
+
+    2. react-dom
+
+    3. react-scheduler
+
+    4. react-reconciler
+
 -   react 如何根据不同的权限访问不同的页面
 
     1. 在页面根据不同的权限隐藏相应的菜单
@@ -1227,12 +1254,37 @@
     2. 带[]的文件，[] 内是 link 中的值，可以为任意你需要传进组件的值，用 \[slug\] 为例, 取值如下：
 
         ```
-        export default function Page({ params }: { params: { slug: string } }) {
-            return <h1>My Page</h1>
+        export default function Page({ params }: { params: Promise<{ slug: string }> }) {
+
+            const { slug } = React.use(params);
+
+            return <h1>{ slug }</h1>
         }
         ```
 
     3. @开头的文件不显示在 link 中
+
+-   nextjs page navigate vs router navigate
+
+    | 特性               | pages 目录                         | app 目录 (App Router)                            |
+    | ------------------ | ---------------------------------- | ------------------------------------------------ |
+    | ‌ 路由定义方式 ‌   | 文件即路由（如 about.js → /about） | 文件夹结构定义路由（如 about/page.tsx → /about） |
+    | ‌ 服务端组件支持 ‌ | 仅客户端组件                       | 默认服务端组件（可切换为客户端组件）             |
+    | 布局系统           | ‌ 需手动通过 \_app.js              | 全局管理 内置嵌套布局（layout.tsx 文件） ‌       |
+    | 动态路由           | ‌ 文件名语法（如 [id].js）         | 文件夹命名语法（如 [id]/page.tsx）               |
+    | 中间件配置         | ‌ 通过 \_middleware.js 文件        | 统一在根目录 middleware.ts 配置 ‌                |
+
+-   nextjs link 跳转
+
+    | 特性             | redirect                                          | useRouter().push               |
+    | ---------------- | ------------------------------------------------- | ------------------------------ |
+    | 适用组件类型 ‌   | 服务端组件、路由处理程序、服务器操作 ‌            | 客户端组件（需 'use client'）‌ |
+    | ‌ 执行环境 ‌     | 服务端或客户端渲染阶段                            | 纯客户端交互（如点击事件）‌    |
+    | ‌ 动态路由支持 ‌ | 需手动拼接路径（如 /post/${id}）‌                 | 支持动态路径传参 ‌             |
+    | ‌HTTP 状态码     | ‌ 默认返回 307（临时重定向）或 303（服务端操作）‌ | 无状态码（客户端导航）‌        |
+    | ‌ 错误处理 ‌     | 内部抛出错误，需避免包裹在 try/catch 中 ‌         | 需手动处理 Promise             |
+
+-   nextjs middleware.ts config
 
 -   useState 过程
 
@@ -1356,6 +1408,20 @@
         };
 
     ```
+
+-   Typescript Types 操作
+
+    See the [examples](../ts//TypesCheck.ts)
+
+-   Typescript special types
+
+    Never: 这个类型不能用于任何赋值，表示不可能得值，例如抛错，无限循环，排除值等。
+
+    在 Exclude 中就是用 never 排除不需要的值的。
+
+        type Exclude<T, U> = T extends U ? never : T;
+
+        type Extract<T, U> = T extends U ? T : never;
 
 -   typescript 特殊操作
 
