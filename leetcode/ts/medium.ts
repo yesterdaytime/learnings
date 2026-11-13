@@ -73,7 +73,7 @@ class MediumLeetCode {
         negative_feedback: string[],
         report: string[],
         student_id: number[],
-        k: number
+        k: number,
     ): number[] {
         let students = new Array(report.length);
         let positive_feedbacks = new Set(positive_feedback);
@@ -95,7 +95,7 @@ class MediumLeetCode {
 
         console.log(students);
         students.sort((a, b) =>
-            b[1] - a[1] === 0 ? a[0] - b[0] : b[1] - a[1]
+            b[1] - a[1] === 0 ? a[0] - b[0] : b[1] - a[1],
         );
 
         return students.slice(0, k).map((s) => s[0]);
@@ -378,7 +378,7 @@ class MediumLeetCode {
                 Math.abs(heights[i][j] - left),
                 Math.abs(heights[i][j] - right),
                 Math.abs(heights[i][j] - up),
-                Math.abs(heights[i][j] - down)
+                Math.abs(heights[i][j] - down),
             );
         };
 
@@ -471,7 +471,7 @@ class MediumLeetCode {
 
     longestPalindromeSubseq(s: string): number {
         const dp: number[][] = Array.from(s).map(() =>
-            Array.from(s).map(() => 1)
+            Array.from(s).map(() => 1),
         );
         let max = s.length ? 1 : 0;
 
@@ -496,6 +496,51 @@ class MediumLeetCode {
         return max;
     }
     //#endregion
+
+    //#region
+    pivotIndex(nums: number[]): number {
+        const total = nums.reduce((pre, curr) => curr + pre, 0);
+        let left = 0,
+            right = total;
+        let index = -1;
+
+        for (let i = 0; i < nums.length; i++) {
+            const num = nums[i];
+            right = right - num;
+
+            if (left === right) {
+                index = i;
+                break;
+            }
+        }
+
+        return index;
+    }
+
+    //#endregion
+
+    //#region
+    myAtoi(s: string): number {
+        const regex = /^\s*[+|-]?\d+/;
+        const match = s.match(regex);
+        const numStr = (match ? match[0] : '').trim();
+        let num = 0;
+
+        if (numStr) {
+            num = Number(numStr);
+        }
+
+        if (num < Math.pow(-2, 31)) {
+            return Math.pow(-2, 31);
+        }
+
+        if (num > Math.pow(2, 31) - 1) {
+            return Math.pow(2, 31) - 1;
+        }
+
+        return num;
+    }
+    //#endregion
 }
 
 const mleetCode = new MediumLeetCode();
@@ -516,8 +561,8 @@ const mleetCode = new MediumLeetCode();
             negative_feedback,
             report,
             student_id,
-            k
-        )
+            k,
+        ),
     );
 
     console.log(mleetCode.findTheArrayConcVal([5, 14, 13, 8, 12]));
@@ -536,15 +581,15 @@ const mleetCode = new MediumLeetCode();
             [1, 2, 1, 2, 1],
             [1, 2, 1, 2, 1],
             [1, 1, 1, 2, 1],
-        ])
+        ]),
     );
     console.log(
         mleetCode.dListNode(
             mleetCode.addTwoNumbers(
                 mleetCode.gNodeList([9, 9, 9, 9, 9, 9, 9]),
-                mleetCode.gNodeList([9, 9, 9, 9])
-            )
-        )
+                mleetCode.gNodeList([9, 9, 9, 9]),
+            ),
+        ),
     );
 
     console.log(mleetCode.longestPalindrome('aacabdkacaa'));

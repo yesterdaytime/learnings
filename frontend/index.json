@@ -1,0 +1,752 @@
+{
+    "id": "1",
+    "name": "英语词根",
+    "isFolded": true,
+    "children": null,
+    "html": "&lt;p style='margin: 0;'&gt;英语词根 &lt;/p &gt;",
+    "treeDirection": "right",
+    "realW": 200,
+    "realH": 48,
+    "translateX": 0,
+    "translateY": 0,
+    "pathType": "default",
+    "treeTheme": "emd_theme0",
+    "_children": [
+        {
+            "id": "a2f9f9e3-9b74-44ac-900d-324266132a9c",
+            "name": "spect: 观察, 看",
+            "html": "&lt;p style='margin: 0;text-decoration: none;opacity: 1;'&gt;spect: 观察, 看 &lt;/p &gt;",
+            "parent": "1",
+            "children": null,
+            "realW": 206,
+            "realH": 44,
+            "direction": "right",
+            "relatedUrl": {
+                "type": "link",
+                "url": "https://www.bilibili.com/video/BV1F6qnYoErw?vd_source=6751c3459dd85431c3cd8eee830b630b",
+                "title": ""
+            },
+            "isFolded": true,
+            "_children": [
+                {
+                    "id": "9ebdb22f-1dc5-46fe-aabb-f4f554b6d643",
+                    "name": "aspect (n)",
+                    "html": "&lt;p style='margin: 0;'&gt;aspect (n)&lt;/p &gt;",
+                    "parent": "a2f9f9e3-9b74-44ac-900d-324266132a9c",
+                    "children": [
+                        {
+                            "id": "f88bd988-a54c-480d-bc80-79a740595e35",
+                            "name": "方面，面貌 a一方面 + spect 看 =  从一方面看：方面，面貌",
+                            "html": "&lt;p style='margin: 0;'&gt;方面，面貌 a一方面 + spect 看 =  从一方面看：方面，面貌 &lt;/p &gt;",
+                            "parent": "9ebdb22f-1dc5-46fe-aabb-f4f554b6d643",
+                            "children": [],
+                            "realW": 433,
+                            "realH": 38
+                        },
+                        {
+                            "id": "f89729df-f9d8-4f06-8d30-0c431f4e1472",
+                            "name": "The book covers various aspects of the subject. 这本书涵盖了该主题的各个方面",
+                            "html": "&lt;p style='margin: 0;'&gt;The book covers various aspects of the subject. 这本书涵盖了该主题的各个方面 &lt;/p &gt;",
+                            "parent": "9ebdb22f-1dc5-46fe-aabb-f4f554b6d643"
+                        }
+                    ],
+                    "realW": 125,
+                    "realH": 38
+                },
+                {
+                    "id": "3dbce185-b5ec-4fb1-80ca-7241eb7f0318",
+                    "name": "inspect (v)",
+                    "html": "&lt;p style='margin: 0;'&gt;inspect (v)&lt;/p &gt;",
+                    "parent": "a2f9f9e3-9b74-44ac-900d-324266132a9c",
+                    "children": [
+                        {
+                            "id": "73b7aa7b-aa0e-4dc7-bcdd-b8d16c4f9d44",
+                            "name": "检查，视察  in 向内 + spect 看 = 检查，视察",
+                            "html": "&lt;p style='margin: 0;'&gt;检查，视察  in 向内 + spect 看 = 检查，视察 &lt;/p &gt;",
+                            "parent": "3dbce185-b5ec-4fb1-80ca-7241eb7f0318",
+                            "plain": "检查视察",
+                            "realW": 343,
+                            "realH": 38
+                        },
+                        {
+                            "id": "ef2c824c-fa73-496e-a2e2-9ce9b464a075",
+                            "name": "The inspector carefully inspect the equipment. 检查员仔细地检查了设备。",
+                            "html": "&lt;p style='margin: 0;'&gt;The inspector carefully inspect the equipment. 检查员仔细地检查了设备。&lt;/p &gt;",
+                            "parent": "3dbce185-b5ec-4fb1-80ca-7241eb7f0318"
+                        }
+                    ],
+                    "realW": 128,
+                    "realH": 38
+                },
+                {
+                    "id": "b7599b4c-6bf1-43a8-9fc3-e229eefbe24e",
+                    "name": " respect (n / v)",
+                    "html": "&lt;p style='margin: 0;'&gt;respect (n / v)&lt;/p &gt;",
+                    "parent": "a2f9f9e3-9b74-44ac-900d-324266132a9c",
+                    "plain": " ",
+                    "children": [
+                        {
+                            "id": "0b6bd689-0031-4af1-88e6-4a05b280d0f5",
+                            "name": "尊重   re 再,又 + spect 看 = 反复的看一个人或事物，对其有敬意",
+                            "html": "&lt;p style='margin: 0;'&gt;尊重   re 再,又 + spect 看 = 反复的看一个人或事物，对其有敬意 &lt;/p &gt;",
+                            "parent": "b7599b4c-6bf1-43a8-9fc3-e229eefbe24e",
+                            "plain": "",
+                            "realW": 441,
+                            "realH": 59
+                        },
+                        {
+                            "id": "c3d5cd6a-dbae-45fd-beb9-70bf74b5567d",
+                            "name": "We should respect our teachers.",
+                            "html": "&lt;p style='margin: 0;'&gt;We should respect our teachers.&lt;/p &gt;",
+                            "parent": "b7599b4c-6bf1-43a8-9fc3-e229eefbe24e"
+                        }
+                    ],
+                    "realW": 158,
+                    "realH": 38
+                },
+                {
+                    "id": "a04962fd-fb88-49ff-9953-834bfd77a0c8",
+                    "name": "suspect (n / v)",
+                    "html": "&lt;p style='margin: 0;'&gt;suspect (n / v)&lt;/p &gt;",
+                    "parent": "a2f9f9e3-9b74-44ac-900d-324266132a9c",
+                    "children": [
+                        {
+                            "id": "60feeb91-6726-4d09-9090-5ffb94a526dd",
+                            "name": "嫌疑犯, 怀疑 su 下面 + spect 看 = 在下面偷偷的看，嫌疑犯",
+                            "html": "&lt;p style='margin: 0;'&gt;嫌疑犯, 怀疑 su 下面 + spect 看 = 在下面偷偷的看，嫌疑犯 &lt;/p &gt;",
+                            "parent": "a04962fd-fb88-49ff-9953-834bfd77a0c8",
+                            "realW": 435,
+                            "realH": 38
+                        },
+                        {
+                            "id": "477c7d75-7c1c-4f99-a750-9b2f7f99256a",
+                            "name": "The police have a suspect in custody. 警方扣留了一名嫌疑犯。",
+                            "html": "&lt;p style='margin: 0;'&gt;The police have a suspect in custody. 警方扣留了一名嫌疑犯。&lt;/p &gt;",
+                            "parent": "a04962fd-fb88-49ff-9953-834bfd77a0c8"
+                        }
+                    ],
+                    "realW": 155,
+                    "realH": 38
+                },
+                {
+                    "id": "23a040e0-f9a5-4cb2-899a-4a77b9575326",
+                    "name": "prospect (n)",
+                    "html": "&lt;p style='margin: 0;'&gt;prospect (n)&lt;/p &gt;",
+                    "parent": "a2f9f9e3-9b74-44ac-900d-324266132a9c",
+                    "children": [
+                        {
+                            "id": "b443787f-d052-4ebb-bd68-3495e874ccb7",
+                            "name": "前景，期望 pro 向前 + spect 看 = 向前看，看到了前景 期望",
+                            "html": "&lt;p style='margin: 0;'&gt;前景，期望 pro 向前 + spect 看 = 向前看，看到了前景 期望 &lt;/p &gt;",
+                            "parent": "23a040e0-f9a5-4cb2-899a-4a77b9575326",
+                            "realW": 437,
+                            "realH": 38
+                        },
+                        {
+                            "id": "e8273c2b-1b56-4129-b6f6-55d137452877",
+                            "name": "The company has good prospects for growth.",
+                            "html": "&lt;p style='margin: 0;'&gt;The company has good prospects for growth.&lt;/p &gt;",
+                            "parent": "23a040e0-f9a5-4cb2-899a-4a77b9575326"
+                        }
+                    ],
+                    "realW": 139,
+                    "realH": 38
+                },
+                {
+                    "id": "d971f62a-6641-4cb5-bea3-e0235e55f6c9",
+                    "name": "introspect (v)",
+                    "html": "&lt;p style='margin: 0;'&gt;introspect (v)&lt;/p &gt;",
+                    "parent": "a2f9f9e3-9b74-44ac-900d-324266132a9c",
+                    "children": [
+                        {
+                            "id": "1b366443-97c4-404e-8151-35a363145d60",
+                            "name": "内省，反省 intro 向内看 + spect 看 = 向内审视自己的内心",
+                            "html": "&lt;p style='margin: 0;'&gt;内省，反省 intro 向内看 + spect 看 = 向内审视自己的内心 &lt;/p &gt;",
+                            "parent": "d971f62a-6641-4cb5-bea3-e0235e55f6c9",
+                            "realW": 427,
+                            "realH": 38
+                        },
+                        {
+                            "id": "b4dff26a-8275-436c-813f-a3084a360467",
+                            "name": "We should often introspect to improve ourself.",
+                            "html": "&lt;p style='margin: 0;'&gt;We should often introspect to improve ourself.&lt;/p &gt;",
+                            "parent": "d971f62a-6641-4cb5-bea3-e0235e55f6c9"
+                        }
+                    ],
+                    "realW": 146,
+                    "realH": 38
+                },
+                {
+                    "id": "b1c2e2c6-78ff-4b14-b5c5-96a9d48452f5",
+                    "name": "retrospect (v)",
+                    "html": "&lt;p style='margin: 0;'&gt;retrospect (v)&lt;/p &gt;",
+                    "parent": "a2f9f9e3-9b74-44ac-900d-324266132a9c",
+                    "children": [
+                        {
+                            "id": "64eea598-d671-45da-b325-6a91bbe423a6",
+                            "name": "回顾 追溯 回想 retro 向后 + spect 看 = 向后看，回顾，追溯",
+                            "html": "&lt;p style='margin: 0;'&gt;回顾 追溯 回想 retro 向后 + spect 看 = 向后看，回顾，追溯 &lt;/p &gt;",
+                            "parent": "b1c2e2c6-78ff-4b14-b5c5-96a9d48452f5",
+                            "realW": 438,
+                            "realH": 38
+                        },
+                        {
+                            "id": "774b0ef2-bc8c-4348-8947-9e993bd20de6",
+                            "name": "In retrospect, we can learn a lot from the history.",
+                            "html": "&lt;p style='margin: 0;'&gt;In retrospect, we can learn a lot from the history.&lt;/p &gt;",
+                            "parent": "b1c2e2c6-78ff-4b14-b5c5-96a9d48452f5"
+                        }
+                    ],
+                    "realW": 148,
+                    "realH": 38
+                },
+                {
+                    "id": "8f286fb3-9c3c-4961-94a8-c1499b81d25d",
+                    "name": "spectacular (adj)",
+                    "html": "&lt;p style='margin: 0;'&gt;spectacular (adj)&lt;/p &gt;",
+                    "parent": "a2f9f9e3-9b74-44ac-900d-324266132a9c",
+                    "children": [
+                        {
+                            "id": "76f99d34-8174-48e2-a309-a6cfa6d3d907",
+                            "name": "壮观的，引人注意的  spect 看 + acular 相容词后缀 = 值得看的，壮观的，引人注意的",
+                            "html": "&lt;p style='margin: 0;'&gt;壮观的，引人注意的  spect 看 + acular 相容词后缀 = 值得看的，壮观的，引人注意的 &lt;/p &gt;",
+                            "parent": "8f286fb3-9c3c-4961-94a8-c1499b81d25d",
+                            "realW": 441,
+                            "realH": 59
+                        },
+                        {
+                            "id": "f35f088b-35b7-44f4-9671-6c76a51e4503",
+                            "name": "The city skyline is spectacular at night。 夜晚的城市天际线非常壮观",
+                            "html": "&lt;p style='margin: 0;'&gt;The city skyline is spectacular at night。 夜晚的城市天际线非常壮观 &lt;/p &gt;",
+                            "parent": "8f286fb3-9c3c-4961-94a8-c1499b81d25d"
+                        }
+                    ],
+                    "realW": 135,
+                    "realH": 38
+                }
+            ]
+        },
+        {
+            "id": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+            "name": "cult 耕种, 培养",
+            "html": "&lt;p style='margin: 0;'&gt;cult 耕种, 培养 &lt;/p &gt;",
+            "parent": "1",
+            "relatedUrl": {
+                "type": "link",
+                "url": "https://www.bilibili.com/video/BV1iYRHYAEwm?vd_source=6751c3459dd85431c3cd8eee830b630b",
+                "title": ""
+            },
+            "children": null,
+            "isFolded": true,
+            "_children": [
+                {
+                    "id": "72db2454-b5ef-421b-8e6f-90a3364c9294",
+                    "name": "cultivate (v)",
+                    "html": "&lt;p style='margin: 0;'&gt;cultivate (v)&lt;/p &gt;",
+                    "parent": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+                    "children": [
+                        {
+                            "id": "be159e63-2b7f-46a9-9a98-9262d3fe22e2",
+                            "name": "耕作， 培养， 陶冶 cult 耕种 + ivate 动词后缀 = 耕作，引申为培养，陶冶",
+                            "html": "&lt;p style='margin: 0;'&gt;耕作， 培养， 陶冶 cult 耕种 + ivate 动词后缀 = 耕作，引申为培养，陶冶 &lt;/p &gt;",
+                            "parent": "72db2454-b5ef-421b-8e6f-90a3364c9294"
+                        },
+                        {
+                            "id": "b9719239-461a-4566-8737-1a191a2faaf7",
+                            "name": "We should cultivate good habits.  我们应该培养好的习惯。",
+                            "html": "&lt;p style='margin: 0;'&gt;We should cultivate good habits.  我们应该培养好的习惯。&lt;/p &gt;",
+                            "parent": "72db2454-b5ef-421b-8e6f-90a3364c9294"
+                        }
+                    ]
+                },
+                {
+                    "id": "382580a3-f0bb-4356-ba37-f0070479668b",
+                    "name": "culture (n)",
+                    "html": "&lt;p style='margin: 0;'&gt;culture (n)&lt;/p &gt;",
+                    "parent": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+                    "children": [
+                        {
+                            "id": "12c6e8b5-da92-4c38-bb94-9d9683f369b5",
+                            "name": "文化，文明，培养 cult 培养 + ure 名词后缀 = 需要长时间培养才能形成的， 文化，文明",
+                            "html": "&lt;p style='margin: 0;'&gt;文化，文明，培养 cult 培养 + ure 名词后缀 = 需要长时间培养才能形成的， 文化，文明 &lt;/p &gt;",
+                            "parent": "382580a3-f0bb-4356-ba37-f0070479668b"
+                        },
+                        {
+                            "id": "92e15c83-96e0-4bb3-94fb-3f97da40c9bf",
+                            "name": "Different countries have different cultures. 不同的国家有不同的文化。",
+                            "html": "&lt;p style='margin: 0;'&gt;Different countries have different cultures. 不同的国家有不同的文化。&lt;/p &gt;",
+                            "parent": "382580a3-f0bb-4356-ba37-f0070479668b"
+                        }
+                    ]
+                },
+                {
+                    "id": "9e2bd006-d3f5-41db-9f4d-48569b7a9a62",
+                    "name": "agricultural (adj)",
+                    "html": "&lt;p style='margin: 0;'&gt;agricultural (adj)&lt;/p &gt;",
+                    "parent": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+                    "children": [
+                        {
+                            "id": "ef5e7ca3-5288-488e-8df8-0b0c155ca8ba",
+                            "name": "农业的，农艺的 agri 土地，农田 +  cult 耕种 + ural 形容词后缀 = 与头地上的耕种有关的，农业的",
+                            "html": "&lt;p style='margin: 0;'&gt;农业的，农艺的 agri 土地，农田 +  cult 耕种 + ural 形容词后缀 = 与头地上的耕种有关的，农业的 &lt;/p &gt;",
+                            "parent": "9e2bd006-d3f5-41db-9f4d-48569b7a9a62"
+                        },
+                        {
+                            "id": "fc1321fa-1093-438d-bdda-0e9565b333b5",
+                            "name": "The country mainly agricultural. 这个国家以农业为主。",
+                            "html": "&lt;p style='margin: 0;'&gt;The country mainly agricultural. 这个国家以农业为主。&lt;/p &gt;",
+                            "parent": "9e2bd006-d3f5-41db-9f4d-48569b7a9a62"
+                        }
+                    ]
+                },
+                {
+                    "id": "e1a81e5e-8e86-4a40-be6d-73d8fae059e4",
+                    "name": "horticulture (n) ",
+                    "html": "&lt;p style='margin: 0;'&gt;horticulture (n) &lt;/p &gt;",
+                    "parent": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+                    "children": [
+                        {
+                            "id": "fd368e3f-54cc-44ff-8fc7-087f30e4165d",
+                            "name": "园艺，园艺学  horti 花园 + cult 耕种 + ure 名词后缀 = 在花园里进行的耕种活动，即园艺",
+                            "html": "&lt;p style='margin: 0;'&gt;园艺，园艺学  horti 花园 + cult 耕种 + ure 名词后缀 = 在花园里进行的耕种活动，即园艺 &lt;/p &gt;",
+                            "parent": "e1a81e5e-8e86-4a40-be6d-73d8fae059e4"
+                        },
+                        {
+                            "id": "cbf80fed-c616-4bb0-9384-e2efacabba30",
+                            "name": " He is interested in horticulture.",
+                            "html": "&lt;p style='margin: 0;'&gt;He is interested in horticulture.&lt;/p &gt;",
+                            "parent": "e1a81e5e-8e86-4a40-be6d-73d8fae059e4"
+                        }
+                    ]
+                },
+                {
+                    "id": "c42db9d5-7d96-4f63-8414-554fc73aa76d",
+                    "name": "aquaculture (n)",
+                    "html": "&lt;p style='margin: 0;'&gt;aquaculture (n)&lt;/p &gt;",
+                    "parent": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+                    "children": [
+                        {
+                            "id": "dd683314-4c01-49ef-aed1-e10501a012f5",
+                            "name": "水产业  aqua 水 + cult 耕种 + ure 名词后缀 = 在水里进行的耕种活动，即水产业",
+                            "html": "&lt;p style='margin: 0;'&gt;水产业  aqua 水 + cult 耕种 + ure 名词后缀 = 在水里进行的耕种活动，即水产业 &lt;/p &gt;",
+                            "parent": "c42db9d5-7d96-4f63-8414-554fc73aa76d"
+                        },
+                        {
+                            "id": "4cb7396c-bca2-480e-abe9-b31e09e6b491",
+                            "name": "Aquaculture is an important insdustry in some areas.",
+                            "html": "&lt;p style='margin: 0;'&gt;Aquaculture is an important insdustry in some areas.&lt;/p &gt;",
+                            "parent": "c42db9d5-7d96-4f63-8414-554fc73aa76d"
+                        }
+                    ]
+                },
+                {
+                    "id": "cb0f065d-f4df-4a01-9b03-313b703602dc",
+                    "name": "cultigen (n)",
+                    "html": "&lt;p style='margin: 0;'&gt;cultigen (n)&lt;/p &gt;",
+                    "parent": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+                    "children": [
+                        {
+                            "id": "436c7bf1-de15-4c9d-8c43-160484a3bc1b",
+                            "name": "培植植物，栽培种子 cult 耕种 + igen 产生 = 通过培养产生的植物，栽培种植的植物",
+                            "html": "&lt;p style='margin: 0;'&gt;培植植物，栽培种子 cult 耕种 + igen 产生 = 通过培养产生的植物，栽培种植的植物 &lt;/p &gt;",
+                            "parent": "cb0f065d-f4df-4a01-9b03-313b703602dc"
+                        },
+                        {
+                            "id": "a2f91c17-a935-4be2-ab7e-1a18fc3594e9",
+                            "name": "The cultigen is widely used in agriculture.",
+                            "html": "&lt;p style='margin: 0;'&gt;The cultigen is widely used in agriculture.&lt;/p &gt;",
+                            "parent": "cb0f065d-f4df-4a01-9b03-313b703602dc"
+                        }
+                    ]
+                },
+                {
+                    "id": "1b21b9f7-dd8c-45f9-8972-4af073791977",
+                    "name": "culturable (adj)",
+                    "html": "&lt;p style='margin: 0;'&gt;culturable (adj)&lt;/p &gt;",
+                    "parent": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+                    "children": [
+                        {
+                            "id": "1ae84961-ff4d-4442-a827-64de3ac6f3ae",
+                            "name": "可耕种，可培养的 cult 耕种 + ure 形容词后缀 + able 可以的 = 可耕种的，可培养的",
+                            "html": "&lt;p style='margin: 0;'&gt;可耕种，可培养的 cult 耕种 + ure 形容词后缀 + able 可以的 = 可耕种的，可培养的 &lt;/p &gt;",
+                            "parent": "1b21b9f7-dd8c-45f9-8972-4af073791977"
+                        },
+                        {
+                            "id": "110c99ef-d1a3-47c2-a33a-99ae6217a7a8",
+                            "name": "This land is culturable. ",
+                            "html": "&lt;p style='margin: 0;'&gt;This land is culturable. &lt;/p &gt;",
+                            "parent": "1b21b9f7-dd8c-45f9-8972-4af073791977"
+                        }
+                    ]
+                },
+                {
+                    "id": "573f4e24-f259-4ffa-8de5-2ec76d0c9ad2",
+                    "name": "subculture (n)",
+                    "html": "&lt;p style='margin: 0;'&gt;subculture (n)&lt;/p &gt;",
+                    "parent": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+                    "children": [
+                        {
+                            "id": "6932bf24-76c8-42f9-9606-d4894cbc191f",
+                            "name": " 亚文化，次文化 sub 在下面 + culture 文化 = 次于主文化的，亚文化",
+                            "html": "&lt;p style='margin: 0;'&gt;亚文化，次文化 sub 在下面 + culture 文化 = 次于主文化的，亚文化 &lt;/p &gt;",
+                            "parent": "573f4e24-f259-4ffa-8de5-2ec76d0c9ad2"
+                        },
+                        {
+                            "id": "d9f5af71-56fa-4282-942f-532a4e95dd5a",
+                            "name": "The young people are influenced by subcultures.",
+                            "html": "&lt;p style='margin: 0;'&gt;The young people are influenced by subcultures.&lt;/p &gt;",
+                            "parent": "573f4e24-f259-4ffa-8de5-2ec76d0c9ad2"
+                        }
+                    ]
+                },
+                {
+                    "id": "ecf5a341-b65c-42da-9261-c56ae327fdbf",
+                    "name": "monoculture (n)",
+                    "html": "&lt;p style='margin: 0;'&gt;monoculture (n)&lt;/p &gt;",
+                    "parent": "c7b567eb-efab-43da-b5d0-302c47f85bb4",
+                    "children": [
+                        {
+                            "id": "98303003-7cc9-4938-bd2a-47c7ed8ca1f5",
+                            "name": "单一栽培，单一文化 mono 单一 + culture 文化，栽培 = 单一文化",
+                            "html": "&lt;p style='margin: 0;'&gt;单一栽培，单一文化 mono 单一 + culture 文化，栽培 = 单一文化 &lt;/p &gt;",
+                            "parent": "ecf5a341-b65c-42da-9261-c56ae327fdbf"
+                        },
+                        {
+                            "id": "12e8a806-ee5f-4a81-b194-80f8a1d9b27b",
+                            "name": "monoculture has some disadvantages. 单一的栽培有一些缺点。",
+                            "html": "&lt;p style='margin: 0;'&gt;monoculture has some disadvantages. 单一的栽培有一些缺点。&lt;/p &gt;",
+                            "parent": "ecf5a341-b65c-42da-9261-c56ae327fdbf"
+                        }
+                    ]
+                }
+            ],
+            "realW": 204,
+            "realH": 44
+        },
+        {
+            "id": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+            "name": "cast 拉丁语中是投掷，扔，在英语中扩展为 投掷，角色分配，铸造",
+            "html": "&lt;p style='margin: 0;'&gt;cast 拉丁语中是投掷，扔，在英语中扩展为 投掷，角色分配，铸造 &lt;/p &gt;",
+            "parent": "1",
+            "children": null,
+            "isFolded": true,
+            "_children": [
+                {
+                    "id": "75aaa372-cd86-4d70-a7bb-df056301ac45",
+                    "name": "broadcast (n, v)",
+                    "html": "&lt;p style='margin: 0;'&gt;broadcast (n, v)&lt;/p &gt;",
+                    "parent": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+                    "children": [
+                        {
+                            "id": "c49db0c7-9722-4d53-96c6-46c695eb4315",
+                            "name": "广播，播送 broad 广阔的 + cast 扔 = 把声音等向广泛的范围扔出去 广播 播送",
+                            "html": "&lt;p style='margin: 0;'&gt;广播，播送 broad 广阔的 + cast 扔 = 把声音等向广泛的范围扔出去 广播 播送 &lt;/p &gt;",
+                            "parent": "75aaa372-cd86-4d70-a7bb-df056301ac45",
+                            "plain": "broad 广阔的 + "
+                        },
+                        {
+                            "id": "8286a645-28d1-4548-9564-bcd9d8ee8fd9",
+                            "name": "The news was broadcast in TV.",
+                            "html": "&lt;p style='margin: 0;'&gt;The news was broadcast in TV.&lt;/p &gt;",
+                            "parent": "75aaa372-cd86-4d70-a7bb-df056301ac45"
+                        }
+                    ]
+                },
+                {
+                    "id": "037beab6-ead0-4eaf-872c-f6313c37e195",
+                    "name": "forecast (v)",
+                    "html": "&lt;p style='margin: 0;'&gt;forecast (v)&lt;/p &gt;",
+                    "parent": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+                    "children": [
+                        {
+                            "id": "2a109f4f-e7fc-4dbb-a326-97d0879d48ba",
+                            "name": "预报，预测 fore 表示前面 + cast 扔 = 预先把对未来的看法扔出来， 预测，预报",
+                            "html": "&lt;p style='margin: 0;'&gt;预报，预测 fore 表示前面 + cast 扔 = 预先把对未来的看法扔出来， 预测，预报 &lt;/p &gt;",
+                            "parent": "037beab6-ead0-4eaf-872c-f6313c37e195"
+                        },
+                        {
+                            "id": "5ff50a45-7ec2-4366-9e93-427832124435",
+                            "name": "The weather forecast says it will rain tomorrow.",
+                            "html": "&lt;p style='margin: 0;'&gt;The weather forecast says it will rain tomorrow.&lt;/p &gt;",
+                            "parent": "037beab6-ead0-4eaf-872c-f6313c37e195"
+                        }
+                    ]
+                },
+                {
+                    "id": "b7849b76-482f-4071-b030-c50eca1ea32f",
+                    "name": "outcast (n, adj)",
+                    "html": "&lt;p style='margin: 0;'&gt;outcast (n, adj)&lt;/p &gt;",
+                    "parent": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+                    "children": [
+                        {
+                            "id": "f0bf63b5-8e3b-4d5a-ac7b-9624ec190555",
+                            "name": "被抛弃的人; 无家可归的 out 外面 + cast 扔 = 扔出去，即无家可归的，抛弃的",
+                            "html": "&lt;p style='margin: 0;'&gt;被抛弃的人; 无家可归的 out 外面 + cast 扔 = 扔出去，即无家可归的，抛弃的 &lt;/p &gt;",
+                            "parent": "b7849b76-482f-4071-b030-c50eca1ea32f"
+                        },
+                        {
+                            "id": "655d9b18-64c9-4bce-a678-3fa746534254",
+                            "name": " He felt like an outcast. 他觉得自己像被抛弃的人。 ",
+                            "html": "&lt;p style='margin: 0;'&gt;He felt like an outcast. 他觉得自己像被抛弃的人。 &lt;/p &gt;",
+                            "parent": "b7849b76-482f-4071-b030-c50eca1ea32f"
+                        }
+                    ]
+                },
+                {
+                    "id": "0371f4bd-9e91-402d-83e3-a54f8daa644b",
+                    "name": "downcast (adj)",
+                    "html": "&lt;p style='margin: 0;'&gt;downcast (adj)&lt;/p &gt;",
+                    "parent": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+                    "children": [
+                        {
+                            "id": "4271ff85-8013-4f0f-9211-6f92ea7506c2",
+                            "name": "沮丧的，垂头丧气的 down 向下+ cast 扔 = 情绪被扔到下面,即沮丧的",
+                            "html": "&lt;p style='margin: 0;'&gt;沮丧的，垂头丧气的 down 向下+ cast 扔 = 情绪被扔到下面,即沮丧的 &lt;/p &gt;",
+                            "parent": "0371f4bd-9e91-402d-83e3-a54f8daa644b"
+                        },
+                        {
+                            "id": "10630577-eada-42a6-a0f2-dd007169a49e",
+                            "name": "He looked downcast after the failure.",
+                            "html": "&lt;p style='margin: 0;'&gt;He looked downcast after the failure.&lt;/p &gt;",
+                            "parent": "0371f4bd-9e91-402d-83e3-a54f8daa644b",
+                            "plain": " "
+                        }
+                    ]
+                },
+                {
+                    "id": "27a60107-5ea6-4ea2-adc6-7f3b3a8a3322",
+                    "name": "newscast (n)",
+                    "html": "&lt;p style='margin: 0;'&gt;newscast (n)&lt;/p &gt;",
+                    "parent": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+                    "children": [
+                        {
+                            "id": "c148307a-b09d-463c-9698-6e12715883c8",
+                            "name": "新闻广播",
+                            "html": "&lt;p style='margin: 0;'&gt;新闻广播 &lt;/p &gt;",
+                            "parent": "27a60107-5ea6-4ea2-adc6-7f3b3a8a3322"
+                        },
+                        {
+                            "id": "10938b49-35c0-4257-835b-d2e19ba7bf01",
+                            "name": "I see the newscast every day.",
+                            "html": "&lt;p style='margin: 0;'&gt;I see the newscast every day.&lt;/p &gt;",
+                            "parent": "27a60107-5ea6-4ea2-adc6-7f3b3a8a3322"
+                        }
+                    ]
+                },
+                {
+                    "id": "b7d0e416-63aa-4b8b-87d2-c539cf31e94a",
+                    "name": "overcast (adj)",
+                    "html": "&lt;p style='margin: 0;'&gt;overcast (adj)&lt;/p &gt;",
+                    "parent": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+                    "children": [
+                        {
+                            "id": "f1063a2e-a808-42e4-a44a-3b7e9ea4d827",
+                            "name": "阴天的，多云的 over 在...之上 + cast 扔 = 云层被扔在天上， 多云的，阴天的",
+                            "html": "&lt;p style='margin: 0;'&gt;阴天的，多云的 over 在...之上 + cast 扔 = 云层被扔在天上， 多云的，阴天的 &lt;/p &gt;",
+                            "parent": "b7d0e416-63aa-4b8b-87d2-c539cf31e94a"
+                        },
+                        {
+                            "id": "67cd2b10-b63c-4e85-bc07-8774b92d10d7",
+                            "name": "The sky is overcast.",
+                            "html": "&lt;p style='margin: 0;'&gt;The sky is overcast.&lt;/p &gt;",
+                            "parent": "b7d0e416-63aa-4b8b-87d2-c539cf31e94a"
+                        }
+                    ]
+                },
+                {
+                    "id": "9139b1de-a6c1-405d-80df-ca7b8c703be9",
+                    "name": "recast (v)",
+                    "html": "&lt;p style='margin: 0;'&gt;recast (v)&lt;/p &gt;",
+                    "parent": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+                    "children": [
+                        {
+                            "id": "c29c97dd-5b87-40e3-82c9-59d4ab2dc3ab",
+                            "name": "重铸，重塑，改写 re 重新 + cast 扔 = 重新扔，就会有不同的样子，即重铸，重塑",
+                            "html": "&lt;p style='margin: 0;'&gt;重铸，重塑，改写 re 重新 + cast 扔 = 重新扔，就会有不同的样子，即重铸，重塑 &lt;/p &gt;",
+                            "parent": "9139b1de-a6c1-405d-80df-ca7b8c703be9"
+                        },
+                        {
+                            "id": "15a13455-eb9b-41ff-a4d9-8322af7a3100",
+                            "name": "The author recast the story.",
+                            "html": "&lt;p style='margin: 0;'&gt;The author recast the story.&lt;/p &gt;",
+                            "parent": "9139b1de-a6c1-405d-80df-ca7b8c703be9"
+                        }
+                    ]
+                },
+                {
+                    "id": "52c74c1f-f7a8-4e15-b303-c461148bd04a",
+                    "name": "castoff (n/adj)",
+                    "html": "&lt;p style='margin: 0;'&gt;castoff (n/adj)&lt;/p &gt;",
+                    "parent": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+                    "children": [
+                        {
+                            "id": "c9f6188f-1ee4-48da-95a0-7b68e13d943a",
+                            "name": "被丢弃的东西，废弃物 cast 扔 + off 离开 = 被扔离开的东西，即被丢弃的东西",
+                            "html": "&lt;p style='margin: 0;'&gt;被丢弃的东西，废弃物 cast 扔 + off 离开 = 被扔离开的东西，即被丢弃的东西 &lt;/p &gt;",
+                            "parent": "52c74c1f-f7a8-4e15-b303-c461148bd04a"
+                        },
+                        {
+                            "id": "34eb4bb7-c52e-44be-a02a-b6dfc6085534",
+                            "name": "The park is full of castoff. 公园里到处都是被丢弃的东西。",
+                            "html": "&lt;p style='margin: 0;'&gt;The park is full of castoff. 公园里到处都是被丢弃的东西。&lt;/p &gt;",
+                            "parent": "52c74c1f-f7a8-4e15-b303-c461148bd04a"
+                        }
+                    ]
+                },
+                {
+                    "id": "6c4f8a77-e472-4ff1-8f36-e2ed04dc9e53",
+                    "name": "castway (n/adj)",
+                    "html": "&lt;p style='margin: 0;'&gt;castway (n/adj)&lt;/p &gt;",
+                    "parent": "24f4bc15-0a2e-49c3-9846-ef81d0e71002",
+                    "children": [
+                        {
+                            "id": "47fd8a85-c1ee-4e5a-badb-4c4df60c75c9",
+                            "name": "被抛弃的人，漂流者；被抛弃的，漂流的",
+                            "html": "&lt;p style='margin: 0;'&gt;被抛弃的人，漂流者；被抛弃的，漂流的 &lt;/p &gt;",
+                            "parent": "6c4f8a77-e472-4ff1-8f36-e2ed04dc9e53"
+                        },
+                        {
+                            "id": "9a05fdd0-a8bb-40a2-a50e-7db47a0bc7c1",
+                            "name": "The novel is about a castway on the deserted island. 这本小说是关于一个在荒岛上的漂流者。",
+                            "html": "&lt;p style='margin: 0;'&gt;The novel is about a castway on the deserted island. 这本小说是关于一个在荒岛上的漂流者。&lt;/p &gt;",
+                            "parent": "6c4f8a77-e472-4ff1-8f36-e2ed04dc9e53"
+                        }
+                    ]
+                }
+            ],
+            "relatedUrl": {
+                "type": "link",
+                "url": "https://www.bilibili.com/video/BV1cwwoedER5?vd_source=6751c3459dd85431c3cd8eee830b630b",
+                "title": ""
+            },
+            "realW": 471,
+            "realH": 64
+        },
+        {
+            "id": "3eb8e8df-d5ca-480f-b064-8d4307a55d6b",
+            "name": "struct 构造，建造",
+            "html": "&lt;p style='margin: 0;'&gt;struct 构造，建造 &lt;/p &gt;",
+            "parent": "1",
+            "children": [
+                {
+                    "id": "e5fff704-225d-4d18-b281-bc30458efddc",
+                    "name": "construct [v/n]",
+                    "html": "&lt;p style='margin: 0;'&gt;construct [v/n]&lt;/p &gt;",
+                    "parent": "3eb8e8df-d5ca-480f-b064-8d4307a55d6b",
+                    "children": [
+                        {
+                            "id": "64d335f4-e2c6-42c2-bdae-6feb2da5d352",
+                            "name": "建造，构造， con共同 + struct建造 = 建造，构造",
+                            "html": "&lt;p style='margin: 0;'&gt;建造，构造， con共同 + struct建造 = 建造，构造 &lt;/p &gt;",
+                            "parent": "e5fff704-225d-4d18-b281-bc30458efddc",
+                            "realW": 372,
+                            "realH": 38
+                        }
+                    ],
+                    "realW": 157,
+                    "realH": 38
+                },
+                {
+                    "id": "c93250bc-6619-4d52-b0e7-eafb937ab023",
+                    "name": "instruct [v]",
+                    "html": "&lt;p style='margin: 0;'&gt;instruct [v]&lt;/p &gt;",
+                    "parent": "3eb8e8df-d5ca-480f-b064-8d4307a55d6b",
+                    "children": [
+                        {
+                            "id": "a12ccefb-3add-4ee4-9a6c-1332bab326d9",
+                            "name": "教导，指示， in 进入 + struct 构造 = 进入某人的思想中进行构造，即指导，指示",
+                            "html": "&lt;p style='margin: 0;'&gt;教导，指示， in 进入 + struct 构造 = 进入某人的思想中进行构造，即指导，指示 &lt;/p &gt;",
+                            "parent": "c93250bc-6619-4d52-b0e7-eafb937ab023",
+                            "realW": 441,
+                            "realH": 58
+                        }
+                    ],
+                    "realW": 130,
+                    "realH": 38
+                },
+                {
+                    "id": "282eab16-6a08-414b-8fba-a3084fdccdde",
+                    "name": "destruct [v]",
+                    "html": "&lt;p style='margin: 0;'&gt;destruct [v]&lt;/p &gt;",
+                    "parent": "3eb8e8df-d5ca-480f-b064-8d4307a55d6b",
+                    "children": [
+                        {
+                            "id": "c91de850-190f-4fc1-bec5-f59c4f8a542a",
+                            "name": "破坏，毁灭，de 否定，破坏 + struct 结构 = 破坏结构，即破坏，毁灭",
+                            "html": "&lt;p style='margin: 0;'&gt;破坏，毁灭，de 否定，破坏 + struct 结构 = 破坏结构，即破坏，毁灭 &lt;/p &gt;",
+                            "parent": "282eab16-6a08-414b-8fba-a3084fdccdde",
+                            "realW": 441,
+                            "realH": 58
+                        }
+                    ],
+                    "realW": 134,
+                    "realH": 38
+                },
+                {
+                    "id": "a4e66ac4-8095-4b46-a979-d606909ac990",
+                    "name": "obstruct [v]",
+                    "html": "&lt;p style='margin: 0;'&gt;obstruct [v]&lt;/p &gt;",
+                    "parent": "3eb8e8df-d5ca-480f-b064-8d4307a55d6b",
+                    "children": [
+                        {
+                            "id": "73f35c2f-f1e3-4419-b6cf-2f8f3718fb1b",
+                            "name": "阻塞，阻碍，ob 相反，对着 + struct 结构 = 和建造的方向相反的，即阻碍建造",
+                            "html": "&lt;p style='margin: 0;'&gt;阻塞，阻碍，ob 相反，对着 + struct 结构 = 和建造的方向相反的，即阻碍建造 &lt;/p &gt;",
+                            "parent": "a4e66ac4-8095-4b46-a979-d606909ac990",
+                            "realW": 441,
+                            "realH": 58
+                        }
+                    ],
+                    "realW": 135,
+                    "realH": 38
+                },
+                {
+                    "id": "41d1966f-5ee4-47ae-b710-a868283c8042",
+                    "name": "structure [n]",
+                    "html": "&lt;p style='margin: 0;'&gt;structure [n]&lt;/p &gt;",
+                    "parent": "3eb8e8df-d5ca-480f-b064-8d4307a55d6b",
+                    "children": [
+                        {
+                            "id": "ec25c3fe-4921-4fc5-bc45-11781c47664e",
+                            "name": "结构， 构造",
+                            "html": "&lt;p style='margin: 0;'&gt;结构， 构造 &lt;/p &gt;",
+                            "parent": "41d1966f-5ee4-47ae-b710-a868283c8042",
+                            "realW": 135,
+                            "realH": 38
+                        }
+                    ],
+                    "realW": 140,
+                    "realH": 38
+                },
+                {
+                    "id": "f424624d-1156-4a49-ac5f-8d1ef9a10f8a",
+                    "name": "recontruct",
+                    "html": "&lt;p style='margin: 0;'&gt;recontruct &lt;/p &gt;",
+                    "parent": "3eb8e8df-d5ca-480f-b064-8d4307a55d6b",
+                    "children": [
+                        {
+                            "id": "f1ac90ec-cb65-4d65-922d-ebcf66d454be",
+                            "name": "重建，重构",
+                            "html": "&lt;p style='margin: 0;'&gt;重建，重构 &lt;/p &gt;",
+                            "parent": "f424624d-1156-4a49-ac5f-8d1ef9a10f8a",
+                            "realW": 130,
+                            "realH": 38
+                        }
+                    ],
+                    "realW": 127,
+                    "realH": 38
+                }
+            ],
+            "isFolded": false,
+            "_children": null,
+            "relatedUrl": {
+                "type": "link",
+                "url": "https://www.bilibili.com/video/BV1RPCcY3ECN?vd_source=6751c3459dd85431c3cd8eee830b630b",
+                "title": ""
+            },
+            "realW": 226,
+            "realH": 44
+        }
+    ],
+    "mode": "outline"
+}

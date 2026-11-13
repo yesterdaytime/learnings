@@ -23,31 +23,33 @@
 
 -   水平垂直居中
 
-    position + margin | transform
-    flex
+    -   position + margin | transform
 
-        content 对应的是多行内容， items 对应的是item, 单行的， self是设置每个item的
+    -   flex
+
+        content 对应的是多行内容， items 对应的是 item, 单行的， self 是设置每个 item 的
+
+        ```css
+        div {
+            display: flex;
+
+            place-content: center; /* 可以传递两个值，align-content justify-content, 如果只给一个，默认两个值相同  */
+            align-content: center; /* 作用于多行 */
+            justify-content: center; /* grid 属性，在flex中不起作用 */
+
+            /* flex: 1 1 auto; 等价于下面三行代码 */
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: auto;
+
+            align-items: center; /* 作用于单行  */
+            justify-items: center; /* 同上 */
+        }
         ```
-            div {
-                display: flex;
 
-                place-content: center; /* 可以传递两个值，align-content justify-content, 如果只给一个，默认两个值相同  */
-                align-content: center; /* 作用于多行 */
-                justify-content: center; /* grid 属性，在flex中不起作用 */
+    -   grid
 
-                /* flex: 1 1 auto; 等价于下面三行代码 */
-                flex-grow: 1;
-                flex-shrink: 1;
-                flex-basis: auto;
-
-                align-items: center; /* 作用于单行  */
-                justify-items: center; /* 同上 */
-            }
-
-        ```
-
-    grid
-    table
+    -   table
 
 -   css 哪些属性可以继承
 
@@ -68,16 +70,41 @@
     light-dark(#fff, #000)
     两个值，分别对应 light 和 dark
 
+-   @property
+
+    可以自定义变量，然后再 css 中使用
+
+    ```css
+    @property --x {
+        syntax: '<color>';
+        inherits: false;
+        initial-value: red;
+    }
+
+    div {
+        background-color: var(--x);
+    }
+    ```
+
+    ```js
+    window.CSS.registerProperty({
+        inherits: false,
+        initialValue: 'red',
+        name: '--x',
+        syntax: '<color>',
+    });
+    ```
+
 -   scss
 
     1. 变量
 
-        ```
-         $highlight-color: #F90;
+        ```scss
+        $highlight-color: #f90;
 
-         div {
+        div {
             color: $highlight-color;
-         }
+        }
         ```
 
     2. 嵌套
@@ -87,9 +114,15 @@
 
     window.matchMedia('(prefers-color-scheme: dark)').matches
 
-    ```
-    @media (prefers-color-scheme: dark) {
+    ```scss
+    .main {
+        background: #ccc;
+    }
 
+    @media (prefers-color-scheme: dark) {
+        .main {
+            background: #333;
+        }
     }
     ```
 
@@ -101,25 +134,24 @@
         @use 是@import 的替代，导入时需要定义导入模块名，
         @forward 支持@use 和 @import 的方式，在 sass 中通常作为整合模块的中转站
 
-    ```
-        // _button.sass
-        .btn-style {
-            background: blue;
-            border-radius: 2px;
-            color: white;
-        }
+    ```scss
+    // _button.sass
+    .btn-style {
+        background: blue;
+        border-radius: 2px;
+        color: white;
+    }
 
-        @import 'buttons';
-        .new-style {
-            @include .btn-style;
-        }
+    @import 'buttons';
+    .new-style {
+        @include .btn-style;
+    }
 
+    @user 'buttons' as btn;
 
-        @user 'buttons' as btn;
-
-        .new-style {
-            @include btn.btn-style;
-        }
+    .new-style {
+        @include btn.btn-style;
+    }
     ```
 
 -   less vs sass
@@ -128,26 +160,35 @@
 
     sass 有 @mixin @include @extend @use @forward @import 等
 
-        参数取值 #{$var}
+    -   sass examples
 
-        mixin： 只接受字符串，不能处理., #之类的selector 样式选择，不支持重写，可以处理默认值
+        -   参数取值 #{$var}
 
-        extend: sass extend做了很多处理，它会判断标签是否合法，重名且中间是空格的会合并，对于空格selector的处理，会将所有可能性的样式selector组合都输出出来，会出现一些意想不到的selector，影响其他布局。这个是很灵活的，记得验证。
+            mixin： 只接受字符串，不能处理., #之类的 selector 样式选择，不支持重写，可以处理默认值
 
-        @each: 循环处理一些样式
+            extend: sass extend 做了很多处理，它会判断标签是否合法，重名且中间是空格的会合并，对于空格 selector 的处理，会将所有可能性的样式 selector 组合都输出出来，会出现一些意想不到的 selector，影响其他布局。这个是很灵活的，记得验证。
 
-            $icons: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
+        -   @each: 循环处理一些样式
+
+            ```scss
+            $icons: (
+                'eye': '\f112',
+                'start': '\f12e',
+                'stop': '\f12f',
+            );
 
             @each $name, $glyph in $icons {
                 .icon-#{$name}:before {
                     display: inline-block;
-                    font-family: "Icon Font";
+                    font-family: 'Icon Font';
                     content: $glyph;
                 }
             }
+            ```
 
-        @if
+        -   @if
 
+            ```scss
             $light-background: #f2ece4;
             $light-text: #036;
             $dark-background: #6b717f;
@@ -169,29 +210,34 @@
                     @include theme-colors($light-theme: false);
                 }
             }
+            ```
 
-    less 对应的
+    -   less 对应的
 
-        参数取值 @{var}
+        -   参数取值 @{var}
 
-        mixin: 所有的样式都可以为mixin, 在引用的时候，不需要加任何关键字，直接在里面写样式就行，当然你也可以在样式后面加括号，效果一样，但定义的时候，样式加括号的，不会显示, mixin支持重写，即相同名称，不同参数，会匹配多个，即传递多个值，能同时匹配到后面一个参数为可选的mixin，用@加参数名可以不遵守传参顺序
+            mixin: 所有的样式都可以为 mixin, 在引用的时候，不需要加任何关键字，直接在里面写样式就行，当然你也可以在样式后面加括号，效果一样，但定义的时候，样式加括号的，不会显示, mixin 支持重写，即相同名称，不同参数，会匹配多个，即传递多个值，能同时匹配到后面一个参数为可选的 mixin，用@加参数名可以不遵守传参顺序
 
-        extend: :extend()，extend是类似function的函数，里面可以传递组合selector, sass没有组合extend的写法，extend不会判断是否合法，不会合并class, 默认只在当前作用域内找，如果加all，会递归到字作用域内
-        继承里面匹配的是字符串，所以顺序不同的，样式一样也不会匹配
-        用参数名定义继承内的名字，无论怎么操作都不会正确继承，用参数定义继承的名字，在继承内部输入具体的继承名，高版本可以被继承
-        用参数来定义样式名，然后继承其他样式，在高版本，这个是无法真正继承的
+            extend: :extend()，extend 是类似 function 的函数，里面可以传递组合 selector, sass 没有组合 extend 的写法，extend 不会判断是否合法，不会合并 class, 默认只在当前作用域内找，如果加 all，会递归到字作用域内
+            继承里面匹配的是字符串，所以顺序不同的，样式一样也不会匹配
+            用参数名定义继承内的名字，无论怎么操作都不会正确继承，用参数定义继承的名字，在继承内部输入具体的继承名，高版本可以被继承
+            用参数来定义样式名，然后继承其他样式，在高版本，这个是无法真正继承的
 
-        导入： @import
+        -   导入： @import
 
-        less 可以批量加!important
+            less 可以批量加!important
 
-
+            ```less
             .important {
                 .foo() !important;
             }
+            ```
 
-        less没有循环的语法，但有when判断条件，在mixin中调用自身，通过when来判断是否中断，可以达到loop的目的
+        -   Each
 
+            less 没有循环的语法，但有 when 判断条件，在 mixin 中调用自身，通过 when 来判断是否中断，可以达到 loop 的目的
+
+            ```less
             .generate-columns(4);
 
             .generate-columns(@n, @i: 1) when (@i =< @n) {
@@ -200,20 +246,23 @@
                 }
                 .generate-columns(@n, (@i + 1));
             }
+            ```
 
-        if:
+        -   if:
 
-            when 可以做if 用， 用 and, not, or 来表示三种关系
+            when 可以做 if 用， 用 and, not, or 来表示三种关系
 
-            @dr: if(@my-option = true, {
-                button {
-                    color: white;
-                }
-                a {
-                    color: blue;
-                }
-            });
-            @dr();
+            ```less
+                    @dr: if(@my-option = true, {
+                        button {
+                            color: white;
+                        }
+                        a {
+                            color: blue;
+                        }
+                    });
+                    @dr();
+            ```
 
 # JS
 
@@ -327,14 +376,14 @@
     3. 将参数赋值给新的对象
     4. 根据基础类型还是引用类型， 返回值或者新创建的对象
 
-    ```
-        export function newFun(fn: any, ...args) {
-            let myObj = {};
-            myObj.__proto__ = fn.prototype;
-            let result = fn.apply(myObj, args);
+    ```typescript
+    export function newFun(fn: any, ...args: any[]) {
+        let myObj = {};
+        myObj.__proto__ = fn.prototype;
+        let result = fn.apply(myObj, args);
 
-            return result instanceof Object ? result : myObj;
-        }
+        return result instanceof Object ? result : myObj;
+    }
     ```
 
 -   js 继承机制
@@ -343,26 +392,26 @@
 
         可以继承方法和参数，但不能传参. 对象实例共享所有父类参数，一个改变，之后的都会改变
 
-        ```
-            Child.prototype = new Parent();
+        ```js
+        Child.prototype = new Parent();
         ```
 
     2. 构造函数继承
 
         可以传参，但不能继承 function
 
-        ```
-            Parent.call(this, ...args);
+        ```js
+        Parent.call(this, ...args);
         ```
 
     3. 组合继承
 
-        ```
-            function Child(...args) {
-                Parent.call(this, ...args);
-            }
+        ```js
+        function Child(...args) {
+            Parent.call(this, ...args);
+        }
 
-            Child.prototype = new Parent();
+        Child.prototype = new Parent();
         ```
 
         可以实现传参，也能用父类的方法， 但父类会调用两次， 在 call 和 prototype 中各一次
@@ -394,10 +443,14 @@
 
     在 TypeScript 中，装饰器（Decorators）是一种特殊类型的声明，它可以附加到类声明、方法、属性或参数上。装饰器使用 @expression 的形式，其中 expression 必须求值为一个函数，该函数将在运行时被调用，作为被装饰的声明的一部分。
 
-    ```
-        function log(target: any, methodName: string, descriptor: TypedPropertyDescriptor<any>) {
-            ....
-        }
+    ```js
+    function log(
+        target: any,
+        methodName: string,
+        descriptor: TypedPropertyDescriptor<any>
+    ) {
+        // ....
+    }
     ```
 
     函数有三个参数
@@ -414,8 +467,12 @@
 
     方法声明有三个参数，常用的是第三个参数， descriptor.value 是装饰器标识的 function
 
-    ```
-    function log(target: any, methodName: string, descriptor: TypedPropertyDescriptor<any>) {
+    ```js
+    function log(
+        target: any,
+        methodName: string,
+        descriptor: TypedPropertyDescriptor<any>
+    ) {
         let originalMethod = descriptor.value;
         descriptor.value = function (...args: any[]) {
             console.log(`Calling: ${methodName}(${args.join(', ')})`);
@@ -424,7 +481,6 @@
             return result;
         };
     }
-
     ```
 
 -   script 标签的 defer 和 async 作用和不同
@@ -466,7 +522,7 @@
 
         Symbol.iterator 可以使 class 变成可以迭代的，从而使 class 可以用迭代,当然，你可以用 list 来存数据.
 
-        ```
+        ```js
         [Symbol.iterator]() {
             let index = 0;
             const list = this.list;
@@ -478,36 +534,43 @@
 
         Symbol.toStringTag 可以定制 toString 输出信息，和 toString 不同, 如果有 toString, 这个就不需要了
 
-        ```
-            get [Symbol.toStringTag]() {
-                return "Test";
-            }
+        ```js
+        get [Symbol.toStringTag]() {
+            return "Test";
+        }
 
-            new Class().toString() => [object Test]
+        new Class().toString() => [object Test]
         ```
 
         Symbol.toPrimitive 根据需要的值，可以定制转化结果.
 
-        ```
-            class MyDateTime {
-                constructor(year, month, day, hour = 0, minute = 0, second = 0) {
-                    this._datetime = new Date(year, month - 1, day, hour, minute, second);
-                }
-                [Symbol.toPrimitive](hint) {
-                    switch (hint) {
-                        case "number":
-                            return this._datetime.getTime();
-                        case "string":
-                            return this._datetime.toLocaleString();
-                        default:
-                            return this._datetime.toString();
-                    }
+        ```js
+        class MyDateTime {
+            constructor(year, month, day, hour = 0, minute = 0, second = 0) {
+                this._datetime = new Date(
+                    year,
+                    month - 1,
+                    day,
+                    hour,
+                    minute,
+                    second
+                );
+            }
+            [Symbol.toPrimitive](hint) {
+                switch (hint) {
+                    case 'number':
+                        return this._datetime.getTime();
+                    case 'string':
+                        return this._datetime.toLocaleString();
+                    default:
+                        return this._datetime.toString();
                 }
             }
+        }
 
-            console.log(myDate); // 输出：Sat Apr 08 2023 15:30:00 GMT+0800 (中国标准时间)
-            console.log(myDate + 10000); // 输出：1699950200000
-            console.log(`${myDate}`); // 输出："2023/4/8 下午3:30:00"
+        console.log(myDate); // 输出：Sat Apr 08 2023 15:30:00 GMT+0800 (中国标准时间)
+        console.log(myDate + 10000); // 输出：1699950200000
+        console.log(`${myDate}`); // 输出："2023/4/8 下午3:30:00"
         ```
 
         Symbol.replace | Symbol.match | Symbol.split
@@ -529,8 +592,12 @@
 
     10. 结构赋值
 
-        ```
-            const { a, b, c: { d }} = test;
+        ```js
+        const {
+            a,
+            b,
+            c: { d },
+        } = test;
         ```
 
 -   js promise, setTimeout 调用顺序的问题
@@ -572,21 +639,21 @@
     3. 发送请求
     4. 接收响应
 
-    ```
-        let xhr = new XMLHttpRequest();
+    ```js
+    let xhr = new XMLHttpRequest();
 
-        xhr.open(method, url);
-        //可以设置请求头，一般不设置
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send(body); //get 请求不传 body 参数，只有 post 请求使用
-        //xhr.responseXML 接收 xml 格式的响应数据
-        //xhr.responseText 接收文本格式的响应数据
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var text = xhr.responseText;
-                console.log(text);
-            }
-        };
+    xhr.open(method, url);
+    //可以设置请求头，一般不设置
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(body); //get 请求不传 body 参数，只有 post 请求使用
+    //xhr.responseXML 接收 xml 格式的响应数据
+    //xhr.responseText 接收文本格式的响应数据
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var text = xhr.responseText;
+            console.log(text);
+        }
+    };
     ```
 
 -   get VS post
@@ -803,7 +870,7 @@
 
     断点续传
 
-    ```
+    ```java
         import java.io.IOException;
         import java.io.InputStream;
         import java.io.RandomAccessFile;
@@ -852,7 +919,7 @@
 
     分片上传
 
-    ```
+    ```java
     import java.io.IOException;
     import java.io.RandomAccessFile;
 
@@ -979,32 +1046,32 @@
 
     4.  loop
 
-    ```
-        for((i=0;i<10;i++))
-        do
-            echo 'loop'
-        done
+    ```sh
+    for((i=0;i<10;i++))
+    do
+        echo 'loop'
+    done
 
-        while [condition]
-        do
+    while [condition]
+    do
 
-        done
+    done
     ```
 
     5.  if
 
-        ```
-            num=15
+        ```sh
+        num=15
 
-            if [ $num -lt 10 ]
-            then
-                echo "Number is less than 10."
-            elif [ $num -eq 10 ]
-            then
-                echo "Number is equal to 10."
-            else
-                echo "Number is greater than 10."
-            fi
+        if [ $num -lt 10 ]
+        then
+            echo "Number is less than 10."
+        elif [ $num -eq 10 ]
+        then
+            echo "Number is equal to 10."
+        else
+            echo "Number is greater than 10."
+        fi
         ```
 
     6.  参数
@@ -1022,7 +1089,7 @@
             \? 未知的
             : 前面都不满足的情况
 
-            ```
+            ```sh
             while getopts ":a:b:c:" opt; do
                 case $opt in
                     a)
@@ -1074,11 +1141,8 @@
 
         将加过输入到文件中
 
-        ```
             > 覆盖操作
             >> 追加到文件末尾
-
-        ```
 
         读取文件内容
 
@@ -1152,27 +1216,29 @@
 
     定义两个状态和样式，然后从左到右和从右到左的状态变化和对应的时间
 
-    ```
-        animations: [
-            trigger('openClose', [
-                state('open', style({
+    ```js
+    animations: [
+        trigger('openClose', [
+            state(
+                'open',
+                style({
                     height: '*',
                     opacity: 1,
-                    backgroundColor: 'yellow'
-                })),
-                state('closed', style({
+                    backgroundColor: 'yellow',
+                })
+            ),
+            state(
+                'closed',
+                style({
                     height: '0px',
                     opacity: 0,
-                    backgroundColor: 'transparent'
-                })),
-                transition('open => closed', [
-                    animate('1s')
-                ]),
-                transition('closed => open', [
-                    animate('0.5s')
-                ])
-            ])
-        ]
+                    backgroundColor: 'transparent',
+                })
+            ),
+            transition('open => closed', [animate('1s')]),
+            transition('closed => open', [animate('0.5s')]),
+        ]),
+    ];
     ```
 
 -   angular inject
@@ -1181,15 +1247,14 @@
 
 -   ts genericity
 
-    ```
-        export type GenericityTest<T> = {
-            [K in keyof T]: T[K] extends String
-                ? T[keyof T]
-                : {
-                    [L in keyof T[K]]: T[K][L];
-                };
-        };
-
+    ```ts
+    export type GenericityTest<T> = {
+        [K in keyof T]: T[K] extends String
+            ? T[keyof T]
+            : {
+                  [L in keyof T[K]]: T[K][L];
+              };
+    };
     ```
 
 -   angular http client
@@ -1253,12 +1318,15 @@
     1. 以文件嵌套为路径
     2. 带[]的文件，[] 内是 link 中的值，可以为任意你需要传进组件的值，用 \[slug\] 为例, 取值如下：
 
-        ```
-        export default function Page({ params }: { params: Promise<{ slug: string }> }) {
-
+        ```ts
+        export default function Page({
+            params,
+        }: {
+            params: Promise<{ slug: string }>;
+        }) {
             const { slug } = React.use(params);
 
-            return <h1>{ slug }</h1>
+            return <h1>{slug}</h1>;
         }
         ```
 
@@ -1400,13 +1468,12 @@
 
         infer 声明一个临时的类型，可以在后面进行判断, 除了object和数组，其他由json过来的数据都认为是基本类型
 
-    ```
-        export type FormControlType<T> = FormControl<T> & {
-            [P in keyof T]: T[P] extends Array<infer U>
-                ? FormArray<FormControlType<U>>
-                : FormControl<T[P]>;
-        };
-
+    ```ts
+    export type FormControlType<T> = FormControl<T> & {
+        [P in keyof T]: T[P] extends Array<infer U>
+            ? FormArray<FormControlType<U>>
+            : FormControl<T[P]>;
+    };
     ```
 
 -   Typescript Types 操作
@@ -1480,89 +1547,250 @@
     -   ‌files‌: 一个数组，指定要编译的单个文件列表（通常与 include 和 exclude 结合使用）。
     -   ‌references‌: 在使用项目引用时，指定要引用的其他 TypeScript 项目的路径。
 
-angular schematics
+-   angular schematics
 
-    创建angular schematics流程：
+    创建 angular schematics 流程：
 
+    1. 创建 collection.json，在里面配置 schematics 实例
+    2. 创建 schema.json，index.ts,template files, schema.ts
+    3. copy 创建模板，并在 schema.json 中设置需要的参数和选项
+    4. 在 template 中根据你的需要设置模板
 
-    1. 创建collection.json，在里面配置schematics实例
-    2. 创建schema.json，index.ts,template files, schema.ts
-    3. copy创建模板，并在schema.json中设置需要的参数和选项
-    4. 在template中根据你的需要设置模板
+    如果你在 files 中有多个文件，会一并生成，同时也可以生成多个文件内的 template,用 chain 合并所有 mergeWith(templateSource)
 
-    如果你在files中有多个文件，会一并生成，同时也可以生成多个文件内的template,用chain合并所有mergeWith(templateSource)
-
-
-    ```
-
+    ```json
     {
         "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
         "schematics": {
-             "my-service": {
+            "my-service": {
                 "description": "Generate a service in the project.",
                 "factory": "./my-service/index#myService",
                 "schema": "./my-service/schema.json"
             }
         }
     }
-
-
-
-
-    ├── collection.json
-    ├── datagrid
-    │   ├── files
-    │   │   └── __name@dasherize__.service.ts.template
-    │   ├── index.ts
-    │   ├── schema.json
-    │   └── schema.ts
-    ├── package.json
-    └── tsconfig.schematics.json
-
-
-    __name@dasherize__:将你传递的name变成短横线隔开的形式
-    camelize‌： 将单词转成驼峰
-    classify‌： 将单词转成首字母大写的单词
-    underscore‌： 将单词转成下滑下隔开的单词
+    ```
 
     ```
 
-webpack federation modules
+        ├── collection.json
+        ├── datagrid
+        │   ├── files
+        │   │   └── __name@dasherize__.service.ts.template
+        │   ├── index.ts
+        │   ├── schema.json
+        │   └── schema.ts
+        ├── package.json
+        └── tsconfig.schematics.json
+
+
+        __name@dasherize__:将你传递的name变成短横线隔开的形式
+        camelize‌： 将单词转成驼峰
+        classify‌： 将单词转成首字母大写的单词
+        underscore‌： 将单词转成下滑下隔开的单词
 
     ```
-        const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
-        module.exports = {
+-   webpack federation modules
 
-            plugins: [
-                new ModuleFederationPlugin({
-                name: "app_name",                           // 1. 应用名称，用于唯一标识当前应用
-                filename: "remoteEntry.js",                // 2. 生成的清单文件名，这个文件包含了暴露和共享的模块信息
-                exposes: {                                 // 3. 暴露给其他应用的模块
-                    "./Component": "./src/Component.js",     // 键是暴露给外界的模块名，值是本地模块的路径
+    ```js
+    const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+
+    module.exports = {
+        plugins: [
+            new ModuleFederationPlugin({
+                name: 'app_name', // 1. 应用名称，用于唯一标识当前应用
+                filename: 'remoteEntry.js', // 2. 生成的清单文件名，这个文件包含了暴露和共享的模块信息
+                exposes: {
+                    // 3. 暴露给其他应用的模块
+                    './Component': './src/Component.js', // 键是暴露给外界的模块名，值是本地模块的路径
                 },
-                remotes: {                                 // 4. 从其他应用消费的模块
-                    app_b: "app_b@http://localhost:3001/remoteEntry.js", // 键是远程应用的名称，值是该应用的清单文件URL
+                remotes: {
+                    // 4. 从其他应用消费的模块
+                    app_b: 'app_b@http://localhost:3001/remoteEntry.js', // 键是远程应用的名称，值是该应用的清单文件URL
                 },
-                shared: ["react", "react-dom"]             // 5. 与其他应用共享的依赖项
-                }),
-            ],
-        };
+                shared: ['react', 'react-dom'], // 5. 与其他应用共享的依赖项
+            }),
+        ],
+    };
+    ```
 
-        ```
+    1. ‌eager: true‌:
 
-    ‌eager: true‌:
+        ‌ 预加载 ‌: Webpack 会在构建时尝试预先加载所有标记为共享的模块。这意味着，即使这些模块在当前的应用中并没有立即被使用，它们也会被包含在最终的构建文件中。
+        ‌ 性能 ‌: 预加载可以减少在应用运行时加载共享模块所需的时间，因为它们在构建时已经被加载并准备好了。然而，这可能会增加初始构建的大小和加载时间，因为所有的共享模块都会被预先加载。
+        ‌ 使用场景 ‌: 适用于那些希望减少运行时加载时间，并且可以接受较大初始构建大小的应用。
 
-    ‌预加载‌: Webpack 会在构建时尝试预先加载所有标记为共享的模块。这意味着，即使这些模块在当前的应用中并没有立即被使用，它们也会被包含在最终的构建文件中。
-    ‌性能‌: 预加载可以减少在应用运行时加载共享模块所需的时间，因为它们在构建时已经被加载并准备好了。然而，这可能会增加初始构建的大小和加载时间，因为所有的共享模块都会被预先加载。
-    ‌使用场景‌: 适用于那些希望减少运行时加载时间，并且可以接受较大初始构建大小的应用。
+    ‌2. eager: false‌（或未设置 eager 属性，因为默认值通常是 false）:
 
-    ‌eager: false‌（或未设置 eager 属性，因为默认值通常是 false）:
-
-    ‌按需加载‌: 共享模块只会在应用运行时被加载，当且仅当它们被实际使用时。这意味着，如果某个共享模块在当前应用中没有被使用，它就不会被包含在最终的构建文件中。
-    ‌性能‌: 按需加载可以减少初始构建的大小和加载时间，因为只有实际使用的模块会被加载。然而，这可能会增加运行时加载共享模块的时间，因为需要在应用运行时动态地加载它们。
-    ‌使用场景‌: 适用于那些希望减小初始构建大小，并且可以接受运行时加载时间可能稍微增加的应用。
+        ‌ 按需加载 ‌: 共享模块只会在应用运行时被加载，当且仅当它们被实际使用时。这意味着，如果某个共享模块在当前应用中没有被使用，它就不会被包含在最终的构建文件中。
+        ‌ 性能 ‌: 按需加载可以减少初始构建的大小和加载时间，因为只有实际使用的模块会被加载。然而，这可能会增加运行时加载共享模块的时间，因为需要在应用运行时动态地加载它们。
+        ‌ 使用场景 ‌: 适用于那些希望减小初始构建大小，并且可以接受运行时加载时间可能稍微增加的应用。
 
 -   代码分析
 
     1. webpack-bundle-analyzer
+
+-   vscode emmet 生成 html tags 规则 [doc](https://docs.emmet.io/)
+
+    emmet 可以删除标签，同时不影响内部标签，也可以对已有标签外层嵌套新的标签。
+
+    vscode 可以通过 command 操作，快捷键和 emmet 本身有些区别，可以自己找
+
+    -   `>`: 生成子元素
+    -   `+`: 生成同级元素
+    -   `^`: 生成父级元素的同级
+    -   `lorem`: 生成随机字符，后面可以跟数字，代表几个单词
+    -   `.`: class
+    -   `#`: id
+    -   `{}`: 大括号包含的东西是标签内的内容
+    -   `[]`: 标签的属性
+    -   `()`: 分组
+    -   `$`: 计数,后面跟@+正数 表示从对应数字开始 @+负数 表示反序，到对应数字结束
+
+        ```html
+        <!-- `>`: 生成子元素 -->
+        <!-- div>p -->
+        <div>
+            <p></p>
+        </div>
+        <!-- `{}`: 大括号包含的东西是标签内的内容 -->
+        <!-- div{test} -->
+        <div>test</div>
+        <!-- `lorem`: 生成随机字符，后面可以跟数字，代表几个单词 -->
+        <!-- div>lorem | div>lorem2 -->
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates,
+            error, odio incidunt perferendis praesentium laborum dicta
+            reprehenderit laudantium molestiae deserunt molestias itaque ex
+            inventore repudiandae assumenda delectus ducimus hic similique?
+        </div>
+        <div>Lorem, ipsum.</div>
+        <!-- `.`: class -->
+        <!-- div.cls -->
+        <div class="cls"></div>
+        <!-- `#`: id -->
+        <!-- div#id -->
+        <div id="id"></div>
+        <!-- `+`: 生成同级元素 -->
+        <!-- div+section -->
+        <div></div>
+        <section></section>
+        <!-- `^`: 生成父级元素的同级 -->
+        <!-- div>p^div -->
+        <div>
+            <p></p>
+        </div>
+        <div></div>
+        <!-- `[]`: 标签的属性 -->
+        <div data-id="test"></div>
+        <!-- `()`: 分组 -->
+        <!-- div>(div>p)>(sect>form) -->
+        <div>
+            <div>
+                <p></p>
+            </div>
+            <section>
+                <form action=""></form>
+            </section>
+        </div>
+        <!-- `$`: 计数 -->
+        <!-- div#item${item$}*3 -->
+        <div id="item1">item1</div>
+        <div id="item2">item2</div>
+        <div id="item3">item3</div>
+        <!-- div#item$@0 -->
+        <div id="item0">item1</div>
+        <!-- div#item$@-0*3 -->
+        <div id="item2"></div>
+        <div id="item1"></div>
+        <div id="item0"></div>
+        ```
+
+-   fetch vs xhr
+
+| 功能              | xhr   | fetch   |
+| ----------------- | ----- | ------- |
+| basic request     | ✅    | ✅      |
+| basic response    | ✅    | ✅      |
+| request progress  | ✅    | ❌      |
+| response progress | ✅    | ✅      |
+| service worker    | ❌    | ✅      |
+| cookie            | ❌    | ✅      |
+| redirect          | ❌    | ✅      |
+| abort request     | ✅    | ✅      |
+| defined referrer  | ❌    | ✅      |
+| stream            | ❌    | ✅      |
+| API style         | Event | Promise |
+| update            | Stop  | Updated |
+
+-   service worker
+
+-   几种高效的结构
+
+    1. HashMap
+    2. B+ tree | B++ tree
+    3. Tries
+    4. Bloom filter
+
+-   Svg Path d 参数说明
+
+    大写是绝对定位，小写是相对定位。
+
+        ````html
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <path d="M10 10 L90 10 V90 H10 Z" fill="none" stroke="black" />
+        </svg>
+        ```
+
+    -   Move
+
+        M | m 移动到对应位置，后面跟点位置
+
+    -   Line
+
+        L | l 在两点之间划线，后面跟点位置
+
+        ```
+        M 10 10 L 20 30 L 10 30 Z
+        ```
+
+    -   Horizental
+
+        H | h: 画水平线, 后面跟长度
+
+        ```
+        M 10 10 H 80
+        ```
+
+    -   Vertical
+
+        V | v: 画垂直线，后面跟长度
+
+    -   贝塞尔曲线
+
+        贝塞尔曲线原理，是确定每个点对应的斜率，起点为前一个点，终点为参数最后一个值，二次曲线为起点，第一个控制点和结束点确定的，三次曲线是有起点和第一个控制点组成的斜率线，第二个和终点组成的斜率线共同组成的，是有两条斜率线。
+
+        T 与 S 分别是二次和三次曲线的扩展，相当于在加一个终点或重点斜率，T 的终点斜率是之前的终点的对称点和终点坐标组成的斜率。S 是直接对应终点斜率，在第一个终点开始时，斜率和之前一样。
+
+        C(Cubic Bézier Curve) x1 y1, x2 y2, x y 或 c dx1 dy1, dx2 dy2, dx dy 根据两个点和终点创建三次贝塞尔曲线
+
+        ```
+            M 0 10 C 0 7 10 13 10 10
+        ```
+
+        S(Smooth Cubic Bézier Curve) x2 y2, x y 或 s dx2 dy2, dx dy: 根据两个点创建平滑的贝塞尔曲线
+
+        Q(Quadratic Bézier Curve) x1 y1, x y 或 q dx1 dy1, dx dy：根据一个点和终点创建二次次贝塞尔曲线
+
+        T(Smooth Quadratic Bézier Curve) x y 或 t dx dy：
+
+    -   弧线
+
+        A rx ry x-axis-rotation large-arc-flag sweep-flag x y 或 a rx ry x-axis-rotation large-arc-flag sweep-flag dx dy：
+
+        -   rx 和 ry：椭圆的 x 和 y 方向的半径。
+        -   x-axis-rotation：椭圆相对于 x 轴的旋转角度。
+        -   large-arc-flag：取值为 0 或 1，决定绘制大弧还是小弧。
+        -   sweep-flag：取值为 0 或 1，决定绘制的弧是顺时针还是逆时针方向。
+        -   x y 是终点

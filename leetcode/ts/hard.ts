@@ -1,4 +1,4 @@
-class ListNode {
+export class ListNode {
     val: number;
     next: ListNode | null;
     constructor(val?: number, next?: ListNode | null) {
@@ -125,7 +125,7 @@ class HardLeetCode {
     minOperationsQueries(
         n: number,
         edges: number[][],
-        queries: number[][]
+        queries: number[][],
     ): number[] {
         return queries.map((query) => {
             let [start, end] = query;
@@ -139,7 +139,7 @@ class HardLeetCode {
                 let left = edges.find(
                     (edge) =>
                         edge[1] === current &&
-                        !selected.some((select) => select === edge)
+                        !selected.some((select) => select === edge),
                 );
                 if (left) {
                     selected.push(left);

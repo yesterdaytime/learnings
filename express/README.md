@@ -14,6 +14,8 @@
 
     app.use(fn)
 
+    app.use(express.urlencoded({ extended: true })); // 当 extended 为 false 时，只能解析 query 类型的，不能解析复合类型的
+
 4. 加载 router
 
     app.use('/api/posts', postRouter);

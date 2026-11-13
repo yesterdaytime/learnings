@@ -4,13 +4,13 @@
 #  If you can't visit the github, please add the 140.82.112.4    github.com to /ect/hosts
 #  Other tools maybe have the different ip, please search them and add it.
 
-# Install brew 
+# Install brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install wget, some install need use it
 brew install wget
 
-brew install nvm 
+brew install nvm
 
 # after this install
 # https://github.com/zsh-users/zsh-autosuggestions

@@ -1,53 +1,46 @@
 apiVersion: v1
 kind: Namespace
-metadata: 
-  name: my-app-ui
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration:
+metadata:
+    name: my-app-ui
+    annotations:
+        kubectl.kubernetes.io/last-applied-configuration:
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-ui
-  namespace: my-app-ui
+    name: my-app-ui
+    namespace: my-app-ui
 spec:
-  selector:
-    matchLabels:
-      app: my-app-ui
-  replicas: 2 # tells deployment to run 2 pods matching the template
-  template:
-    metadata:
-      labels:
-        app: my-app-ui
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.14.2
-        ports:
-        - containerPort: 80
+    selector:
+        matchLabels:
+            app: my-app-ui
+    replicas: 2 # tells deployment to run 2 pods matching the template
+    template:
+        metadata:
+            labels:
+                app: my-app-ui
+        spec:
+            containers:
+                - name: nginx
+                  image: nginx:1.14.2
+                  ports:
+                      - containerPort: 80
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app-ui
-  namespace: my-app-ui
+    name: my-app-ui
+    namespace: my-app-ui
 spec:
-  selector:
-    app: my-app-ui
-  type: ClusterIP
-  sessionAffinity: None
-  sessionAffinityConfig:
-    clientIP:
-      timeoutSeconds: 10800
-  ports:
-  - name: my-app-ui
-    port: 8082
-    targetPort: 80
+    selector:
+        app: my-app-ui
+    type: ClusterIP
+    ports:
+        - name: my-app-ui
+          port: 8082
+          targetPort: 80
 ---
-
 # apiVersion: "v1"
 # kind: "Secret"
 # metadata:
@@ -63,18 +56,18 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-app-ui-ingress
-  namespace: my-app-ui
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    name: my-app-ui-ingress
+    namespace: my-app-ui
+    annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /my-app-ui
-        pathType: Prefix
-        backend:
-          service:
-            name: my-app-ui
-            port:
-              number: 8082
+    rules:
+        - http:
+              paths:
+                  - path: /my-app-ui
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: my-app-ui
+                            port:
+                                number: 8082

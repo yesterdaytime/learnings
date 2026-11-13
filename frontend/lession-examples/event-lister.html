@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Test Event Click</title>
+    </head>
+    <body>
+        <button class="btn">Click Btn</button>
+        <button class="btn btn-count">Add number</button>
+
+        <p class="result">0</p>
+    </body>
+
+    <script>
+        function getElement(selector) {
+            const dom = document.querySelector(selector);
+
+            const proxy = new Proxy(dom, {
+                get(target, prop, receiver) {
+                    if (prop.startsWith('wait')) {
+                        return new Promise((resolve) => {
+                            const eventName = prop.slice(4).toLowerCase();
+                            dom.addEventListener(eventName, resolve, {
+                                once: true,
+                            });
+                        });
+                    } else {
+                        return Reflect.get(target, prop, receiver);
+                    }
+                },
+            });
+
+            return proxy;
+        }
+
+        const numberBtn = document.querySelector('.btn-count');
+        const p = document.querySelector('p');
+
+        numberBtn.addEventListener('click', () => {
+            p.innerText = parseInt(p.innerText) + 1;
+        });
+
+        (async () => {
+            const btn = getElement('.btn');
+            while (1) {
+                //  waitClick 代表每次点击都会返回一个new Promise, 那可以用proxy
+                await btn.waitClick;
+                console.log('clicked');
+            }
+        })();
+    </script>
+</html>

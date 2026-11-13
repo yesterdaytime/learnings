@@ -8,3 +8,18 @@ leetcode: do some leetcode exam
 front: front knowledge
 sort: sort in python and ts
 linux: shell and some linux command
+
+-   Some good website for learning
+
+    -   https://www.joshwcomeau.com/
+    -   https://tkdodo.eu/
+    -   http://antfu.me/
+    -   https://www.frontendjoy.com/
+
+-   练手项目
+
+    -   小米商城首页
+    -   迅雷首页
+    -   米课首页
+    -   穷游网首页
+    -   table and form 一个完整的 CRUD

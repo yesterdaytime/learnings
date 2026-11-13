@@ -42,7 +42,7 @@
 
 [baidu](http://baidu.com/)
 
-[baidu]: http://baidu.com/ "baidu"
+[baidu]: http://baidu.com/ 'baidu'
 
 [baidu]
 

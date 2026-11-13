@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Svg B</title>
+    </head>
+    <body>
+        <svg
+            width="1000px"
+            height="800px"
+            viewBox="0 0 400 200"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+            <g fill="#636363">
+                <!-- 线条的基础使用 -->
+                <!-- M move -->
+                <!-- L line to -->
+                <!-- H herizon -->
+                <!-- V verizion -->
+
+                <!-- <path d="M20 20 L 30 30" stroke="red"></path>
+                <path d="M20 20 H 40" stroke="red"></path>
+                <path d="M20 20 V 40" stroke="red"></path> -->
+
+                <!-- Z 命令会从当前点画一条直线到路径的起点 -->
+                <!-- <path
+                    d="M 50 50 L 60 60 L 50 70 Z"
+                    stroke="red"
+                    fill="transparent"
+                ></path> -->
+
+                <!-- 贝塞尔曲线 -->
+                <!-- <path d="M 80 20 L 90 20 C 90 20, 100 40, 110 20" stroke="red" fill="transparent"></path> -->
+
+                <!-- 二阶Q使用demo -->
+                <!-- <path d="M 10 80 Q 95 10 180 80" stroke="red" fill="transparent"/>
+            <path d="M 10 80 L 95 10 L 180 80" stroke="green" fill="transparent"/>
+    
+            <text x="10" y="90" font-size="9px">M 10 80</text>
+            <text x="95" y="10" font-size="9px">95 10控制点</text>
+            <text x="180" y="80" font-size="9px">180 80终点</text>
+            <text x="50" y="100" font-size="9px">M 10 80 Q 95 10 180 80</text> -->
+
+                <!-- 二阶T使用demo -->
+                <path
+                    d="M 10 80 Q 52.5 10, 95 80 T 180 80"
+                    stroke="red"
+                    fill="transparent"
+                />
+                <path
+                    d="M 10 80 Q 52.5 10, 95 80 Q 137.5 150, 180 80"
+                    stroke="red"
+                    fill="transparent"
+                />
+                <path
+                    d="M 10 80 L 52.5 10 L 95 80"
+                    stroke="green"
+                    fill="transparent"
+                />
+                <path
+                    d="M 95 80 L 137.5 150"
+                    stroke="blue"
+                    fill="transparent"
+                />
+                <path
+                    d="M 137.5 150 L 180 80"
+                    stroke="green"
+                    fill="transparent"
+                />
+
+                <text x="10" y="80" font-size="9px">M 10 80</text>
+                <text x="52.5" y="10" font-size="9px">52.5 10控制点</text>
+                <text x="95" y="80" font-size="9px">第一个落点95 80</text>
+                <text x="135" y="160" font-size="9px">
+                    52.5 10以95 80为中心的对称点137.5 150
+                </text>
+                <text x="135" y="170" font-size="9px">
+                    使用T根据前一个Q计算出的控制点
+                </text>
+                <text x="180" y="80" font-size="9px">T 180 80</text>
+
+                <!-- 三阶C使用demo -->
+                <!-- <path d="M 10 10 C 20 20, 40 20, 50 10" stroke="red" fill="transparent"/>
+    
+            <path d="M 10 10 L 20 20" stroke="green" fill="transparent"/>
+            <path d="M 40 20 L 50 10" stroke="green" fill="transparent"/>
+    
+            <text x="10" y="10" font-size="5px">M 10 10</text>
+            <text x="3" y="25" font-size="5px">20 20控制点</text>
+            <text x="40" y="25" font-size="5px">40 20控制点</text>
+            <text x="50" y="10" font-size="5px">50 10终点</text> -->
+
+                <!-- 三阶S使用demo -->
+                <!-- <path d="M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80" stroke="red" fill="transparent"/>
+            <path d="M 10 80 C 40 10, 65 10, 95 80 C 125 150, 150 150, 180 80" stroke="red" fill="transparent"/>
+    
+            <path d="M 10 80 L 40 10" stroke="green" fill="transparent"/>
+            <path d="M 65 10 L 95 80" stroke="green" fill="transparent"/>
+            <path d="M 95 80 L 125 150" stroke="blue" fill="transparent"/>
+            <path d="M 150 150 L 180 80" stroke="green" fill="transparent"/>
+    
+            <text x="10" y="85" font-size="5px">M 10 80</text>
+            <text x="25" y="10" font-size="5px">40 10 控制点</text>
+            <text x="60" y="10" font-size="5px">65 10 控制点</text>
+            <text x="95" y="80" font-size="5px">95 80 第一个终点</text>
+            <text x="90" y="155" font-size="5px">65,10 - 95,80的对称点125,150</text>
+            <text x="155" y="150" font-size="5px">S 150 150控制点</text>
+            <text x="180" y="80" font-size="5px">180 80终点</text> -->
+            </g>
+        </svg>
+    </body>
+</html>
