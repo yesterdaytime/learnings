@@ -216,6 +216,148 @@ type Form<T> = T extends Array<infer F>
       }>;
 ```
 
+### 泛型关键字
+
+| 关键字   | 位置     | 操作                                                |
+| -------- | -------- | --------------------------------------------------- |
+| in       | Key      | include dictionary                                  |
+| extends  | any      | 继承判断                                            |
+| as       | Key      | and                                                 |
+| infer    | 变量     | 定义变量， Key 中变量不用定义，直接用               |
+| readonly | 原数组   | 定义dictionary， 将any[] 变成 dictionary            |
+| const    | 函数参数 | 类似 as const, 将参数变成readonly， typeof 直接返回 |
+
+### 泛型中替换用法
+
+```TypeScript
+// Record 等价于 Object
+type  ObjectType {
+    a: string;
+    b: number;
+}
+//  ===
+type ObjectType = Record<'a', string> & Record<'b': number>;
+
+// 取string数字
+T extends `${infer C extends number}` ? C : never;
+
+// 单数
+`${T}` extends `${number | ''}${1 | 3 | 5 | 7 | 9}` ？ true : false;
+
+// 写法是Object,本质是list
+type List<T extends any[]> = {
+    [K in keyof T]: T[K]
+}
+// ===
+type List<T extends any[]> = T;
+
+readonly any[] == dictionary
+
+```
+
+### 泛型的判断与传参
+
+```TypeScript
+// 在key中的判断用in
+type Perfect<T extends Object> = {
+    [K in keyof T]: T[K];
+};
+
+// 在判断类型是否是某个类型时用extends
+type NewType<T> = T extends PropertyKey
+    ? T
+    : T extends Array<any>
+      ? T[0]
+      : never;
+
+// 数字判断
+type CheckNumber<T extends string | number> = T extends number ? T : T extends `${infer C extends number}` ? T: never;
+
+// 传递 1 | 2 | 3
+type Params<T extends number> = {
+    [K in T]: T;
+};
+// readonly 只能做用于原数组, 可以像list一样处理 1 | 2 | 3
+type Params<T extends readonly number[]> = {
+    [K in T[number]]: T;
+};
+
+// 传递List，并递归
+type NList<T extends string[], R extends Record<string, string> = {}> = T extends [infer P, ...infer RestParams] ? NList<RestParams, R & {[K in P]: P} : R>
+
+// List变Direct  Arr[number]
+type LTD<T extends string[]> = {
+    [K in T[number]]: K
+}
+
+// 判断 Object
+type Excuse<T> =
+	T extends Record<infer X extends string, infer Y extends string>
+		? new (arg: T) => `${X}: ${Y}`
+		: never;
+
+
+// 判断类型相等
+// type Equal<T, U> = T extends U ? U extends T ? true : false : false; 在 1 | 2 vs 1 和 type vs any 返回boolean 不是true or false
+type Equals<X, Y> =
+  (<T>() => T extends X ? 1 : 2) extends
+  (<T>() => T extends Y ? 1 : 2)
+    ? true
+    : false;
+
+// 对数组用 keyof，虽然是Record类型，但是TS 会保留原类型， 所以最后会是list类型，并不是object类型
+// 如果T中第二个和U匹配，则Testing<T, U> ==== [false, true, false]
+type Testing<T extends readonly any[], U> = {
+    [K in keyof T]: Equal<T[K], U>;
+};
+
+// 特殊 extends
+// Object vs object vs never
+//  object == Record, 但Record 确定了类型， object没有限制类型
+type neverCases = [
+	Expect<Equal<never extends boolean ? true : false, true>>,
+	Expect<Equal<never extends number ? true : false, true>>,
+	Expect<Equal<never extends string ? true : false, true>>,
+	Expect<Equal<never extends symbol ? true : false, true>>,
+	Expect<Equal<never extends object ? true : false, true>>,
+	Expect<Equal<never extends [] ? true : false, true>>,
+	Expect<Equal<never extends Function ? true : false, true>>,
+	Expect<Equal<never extends 'wtf' ? true : false, true>>,
+]
+
+type ObjectCases = [
+	Expect<Equal<1 extends Object ? true : false, true>>,
+	Expect<Equal<'' extends Object ? true : false, true>>,
+	Expect<Equal<true extends Object ? true : false, true>>,
+    Expect<Equal<symbol extends Object ? true : false, true>>,
+	Expect<Equal<(() => {}) extends Object ? true : false, true>>,
+	Expect<Equal<[] extends Object ? true : false, true>>,
+	Expect<Equal<{} extends Object ? true : false, true>>,
+]
+
+type ObjectCases = [
+	Expect<Equal<1 extends object ? true : false, false>>,
+	Expect<Equal<'' extends object ? true : false, false>>,
+	Expect<Equal<true extends object ? true : false, false>>,
+	Expect<Equal<symbol extends object ? true : false, false>>,
+
+	Expect<Equal<(() => {}) extends object ? true : false, true>>,
+	Expect<Equal<[] extends object ? true : false, true>>,
+	Expect<Equal<{} extends object ? true : false, true>>,
+]
+
+```
+
+```TypeScript
+// 参数加 const, 可以用typeof 拿到数组
+// const 只能在函数的参数中用
+const createRoute = <const Route extends string[]>(author: string, route: Route) => ({
+	author,
+	route,
+	createdAt: Date.now(),
+});
+```
+
 ## as 和 satisfies
 
 在 Typescript 中，我们有时候需要将已有的数据转化成对应的类型，这个时候 as 和 satisfies 就是你的选择。
